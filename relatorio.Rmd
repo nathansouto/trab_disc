@@ -79,10 +79,6 @@ Resumo Resumo Resumo
 
 \newpage
 
-\listoffigures
-
-\newpage
-
 
 # Introdução
 
