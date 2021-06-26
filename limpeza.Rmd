@@ -5,5 +5,8 @@ output: pdf_document
 
 ```{r}
 library(tidyverse)
+library(readxl)
+
+dados <- read_csv("WA_Fn-UseC_-HR-Employee-Attrition.csv")
 ```
 
