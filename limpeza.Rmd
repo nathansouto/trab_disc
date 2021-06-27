@@ -3,6 +3,51 @@ title: "limpeza dos dados"
 output: pdf_document
 ---
 
+##########################################################################################################
+                                   DOCUMENTAÇÃO DOS DADOS
+##########################################################################################################
+
+  Attrition-Atrito = categórica (No Yes)
+  Age-Idade = contínua (18 - 60)
+  BusinessTravel-Viagem = categórica (non-travel travel_rarely travel_frequently)
+  Department-Departamento = categórica (RH Research&Development Sales)
+  DistanceFromHome-Distancia = numérica (1 - 29)
+  Education-Educacao = numérica (1 - 5)
+  EducationField-faculdade = categórica (RH Life_Sciences Marketing Medical Other Technical_Degree)
+  EnvironmentSatisfaction-satisfacaoAmbiente = numérica (1 - 4)
+  Gender-sexo = categórica (female male)
+  JobLevel-Nivel = numérica (1 - 5)
+  JobRole-Cargo = categórica (Healthcare_Representative RH Laboratory_Technician Manager Manufacturing_Director Research_Director Research_Scientist Sales_Executive Sales_Representative)
+  JobSatisfaction-satisfacaotrab = numérica (1 - 4)
+  MonthlyIncome-rendaMensal = numérica (1009 - 19999)
+  PerformanceRating-desempenho = numérica (3 - 4)
+  TotalWorkingYears-anosquetrabalha = numérica (0 - 40)
+  YearsAtCompany-temponaempresa = numérica (0 - 40)
+  YearsInCurrentRole-anosnafuncao = numérica (0 - 18)
+  YearsSinceLastPromotion-anosultimapromocao = numérica (0 - 15)
+  YearsWithCurrManager-anosatualgerente = numérica (0 - 17)
+  JobInvolvement-Envolvimento = numérica (1 - 4)
+  MaritalStatus-relacionamento = categórica (Divorced Married Single )
+  NumCompaniesWorked-qtdEmpresaTrabalho = numérica (0 - 9)
+  OverTime-horaExtra = categórica (No Yes)
+  PercentSalaryHike-%aumentoSal = numérica (11 - 25)
+  RelationshipSatisfaction-satisfacaorela = numérica (1 - 4)
+  TrainingTimesLastYear-tempotreinamento = numérica (0 - 6)
+  WorkLifeBalance-equilibrio = numérica (1 - 4)
+	StockOptionLevel-ações = numérica (0 - 3)
+	MonthlyRate-Taxa = numérica (2094 - 26999)
+	HourlyRate-TaxaHoraria = numérica (30 - 100)
+	EmployeeNumber-quantidadefuncionarios = numérica (1 - 2068)
+	DailyRate-Diaria = numérica (102 1499)
+  
+  EmployeeCount-funcionarios = binária (1) só tem valores iguais a 1 ----------- coluna inútil
+  StandardHours-horapadrao = numérica (80) ----------- coluna inútil
+  Over18 = string (Y) ----------- coluna inútil
+  
+##########################################################################################################
+
+
+
 ```{r}
 library(tidyverse)
 
@@ -64,7 +109,7 @@ ggplot(aes(x=DistanceFromHome, y=MonthlyIncome, col=Attrition)) +
 
 ```{r}
 dados$Attrition = factor(dados$Attrition, levels = c('No','Yes'))
-fit = rpart(formula = dados$Attrition ~ ., method = 'class', data = dados, parms = list(split = 'gini'), cp = 0.0002) #, control = repart.control(minsplit = 1, minbucket = 1, maxdepth = 25)
+fit = rpart(formula = dados$Attrition ~ ., method = 'class', data = dados, parms = list(split = 'gini'), cp = 0.01) #, control = repart.control(minsplit = 1, minbucket = 1, maxdepth = 25)
 
 boxplot(fit$variable.importance)
 
