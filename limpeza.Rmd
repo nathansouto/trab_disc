@@ -78,6 +78,11 @@ VARIÁVEIS NÃO-SUBJETIVAS E PEGANDO SOMENTE O MONTHLY INCOME (em salários)
 
 ```{r}
 library(tidyverse)
+library(caret)
+
+#ID3
+require(rpart)
+require(rpart.plot)
 ```
 
 ```{r}
@@ -87,35 +92,120 @@ dados <- read_csv("WA_Fn-UseC_-HR-Employee-Attrition.csv")
 ```{r}
 summary(dados)
 
-# dados$Education[dados$Education == 1] <- "Bellow College"
-# dados$Education[dados$Education == 2] <- "College"
-# dados$Education[dados$Education == 3] <- "Bachelhor"
-# dados$Education[dados$Education == 4] <- "Master"
-# dados$Education[dados$Education == 5] <- "Doctor"
-# 
-# dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 1] <- "Low"
-# dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 2] <- "Medium"
-# dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 3] <- "High"
-# dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 4] <- "Very High"
-# 
-# dados$JobInvolvement[dados$JobInvolvement == 1] <- "Low"
-# dados$JobInvolvement[dados$JobInvolvement == 2] <- "Medium"
-# dados$JobInvolvement[dados$JobInvolvement == 3] <- "High"
-# dados$JobInvolvement[dados$JobInvolvement == 4] <- "Very High"
-# 
-# dados$JobSatisfaction[dados$JobSatisfaction == 1] <- "Low"
-# dados$JobSatisfaction[dados$JobSatisfaction == 2] <- "Medium"
-# dados$JobSatisfaction[dados$JobSatisfaction == 3] <- "High"
-# dados$JobSatisfaction[dados$JobSatisfaction == 4] <- "Very High"
-# 
-# dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 1] <- "Low"
-# dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 2] <- "Medium"
-# dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 3] <- "High"
-# dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 4] <- "Very High"
-# 
-# dados$PerformanceRating[dados$PerformanceRating == 1] <- "Low"
-# dados$PerformanceRating[dados$PerformanceRating == 2] <- "Good"
-# dados$PerformanceRating[dados$PerformanceRating == 3] <- "Excellent"
-# dados$PerformanceRating[dados$PerformanceRating == 4] <- "Very High"
+dados$Education[dados$Education == 1] <- "Bellow College"
+dados$Education[dados$Education == 2] <- "College"
+dados$Education[dados$Education == 3] <- "Bachelhor"
+dados$Education[dados$Education == 4] <- "Master"
+dados$Education[dados$Education == 5] <- "Doctor"
+
+dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 1] <- "Low"
+dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 2] <- "Medium"
+dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 3] <- "High"
+dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 4] <- "Very High"
+
+dados$JobInvolvement[dados$JobInvolvement == 1] <- "Low"
+dados$JobInvolvement[dados$JobInvolvement == 2] <- "Medium"
+dados$JobInvolvement[dados$JobInvolvement == 3] <- "High"
+dados$JobInvolvement[dados$JobInvolvement == 4] <- "Very High"
+
+dados$JobSatisfaction[dados$JobSatisfaction == 1] <- "Low"
+dados$JobSatisfaction[dados$JobSatisfaction == 2] <- "Medium"
+dados$JobSatisfaction[dados$JobSatisfaction == 3] <- "High"
+dados$JobSatisfaction[dados$JobSatisfaction == 4] <- "Very High"
+
+dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 1] <- "Low"
+dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 2] <- "Medium"
+dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 3] <- "High"
+dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 4] <- "Very High"
+
+dados$PerformanceRating[dados$PerformanceRating == 1] <- "Low"
+dados$PerformanceRating[dados$PerformanceRating == 2] <- "Good"
+dados$PerformanceRating[dados$PerformanceRating == 3] <- "Excellent"
+dados$PerformanceRating[dados$PerformanceRating == 4] <- "Very High"
 ```
 
+```{r}
+dados = dados %>%
+  select(-c(EmployeeCount, Over18, StandardHours))
+
+```
+
+```{r}
+dados %>%
+  group_by(Attrition) %>%
+  summarise(n = n()) %>%
+  mutate(freq = n / sum(n)) 
+```
+
+Acho que pode ser uma tabela
+```{r}
+dados %>%
+  group_by(Gender, Attrition) %>%
+  summarise(n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  ggplot(aes(x=Gender, fill=Attrition)) +
+  geom_bar(size=3, position="dodge", aes(y = freq), stat = 'identity') +
+  xlab("Atrito") +                             
+  ylab("Frequência relativa") +                                  
+  ggtitle("Frequência relativa das respostas de atrito por sexo")
+```
+
+```{r}
+dados %>%
+  group_by(JobRole, Attrition) %>%
+  summarise(n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  ggplot(aes(x=Attrition, fill=JobRole)) +
+  geom_bar(size=3, position="dodge", aes(y = freq), stat = 'identity') +
+  xlab("Atrito") +                             
+  ylab("Frequência relativa") +                                  
+  ggtitle("Frequência realtiva das respostas de atrito por cargo")
+```
+
+```{r}
+dados %>%
+ggplot(aes(x=Age, y=MonthlyIncome, col=Attrition)) +
+  geom_point(size=3) +
+  xlab("Idade") +                             
+  ylab("Salário") +                                  
+  ggtitle("Frequência das respostas de atrito por Salário e idade")
+```
+
+```{r}
+dados %>%
+ggplot(aes(x=DistanceFromHome, y=MonthlyIncome, col=Attrition)) +
+  geom_point(size=2) +
+  xlab("Idade") +                             
+  ylab("Salário") +                                  
+  ggtitle("Frequência das respostas de atrito por ")
+```
+
+
+### Separar o banco em duas parte, uma para treinar o modelo e o outro para testar o modelo
+
+```{r}
+dados$Attrition = factor(dados$Attrition, levels = c('No','Yes'))
+
+train <- dados[1:900,]
+test <- dados[901:1470,]
+
+fit = rpart(formula = Attrition ~ ., method = 'class', data = train, parms = list(split = 'information')) #, control = repart.control(minsplit = 1, minbucket = 1, maxdepth = 25)
+
+fit$variable.importance
+
+fit$cptable
+printcp(fit)
+plotcp(fit)
+
+predict(fit, newdata = train, type = "class") %>%
+  table(train$Attrition, .) %>%
+  confusionMatrix()
+
+predict(fit, newdata = test, type = "class") %>%
+  table(test$Attrition, .) %>%
+  confusionMatrix()
+```
+
+```{r}
+rpart.plot(fit, type=0, extra=101, box.palette="gray", branch.lty = 3, shadow.col = "green", nn=TRUE, cex=1)
+```
