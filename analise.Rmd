@@ -1,0 +1,83 @@
+---
+title: "analises"
+output: pdf_document
+---
+
+```{r}
+library(tidyverse)
+
+#ID3
+require(readxl)
+require(rpart)
+require(rpart.plot)
+```
+
+```{r}
+dados <- read_csv("WA_Fn-UseC_-HR-Employee-Attrition.csv")
+```
+
+```{r}
+dados = dados %>%
+  select(-c(EmployeeCount, Over18, StandardHours))
+
+```
+
+```{r}
+dados %>%
+  group_by(Gender, Attrition) %>%
+  summarise(n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  ggplot(aes(x=Gender, fill=Attrition)) +
+  geom_bar(size=3, position="dodge", aes(y = freq), stat = 'identity') +
+  xlab("Atrito") +                             
+  ylab("Frequência relativa") +                                  
+  ggtitle("Frequência relativa das respostas de atrito por sexo")
+```
+
+```{r}
+dados %>%
+ggplot(aes(x=Attrition, fill=JobRole)) +
+  geom_bar(size=3, position="dodge") +
+  xlab("Atrito") +                             
+  ylab("Frequência") +                                  
+  ggtitle("Frequência das respostas de atrito por cargo")
+```
+
+```{r}
+dados %>%
+ggplot(aes(x=Age, y=MonthlyIncome, col=Attrition)) +
+  geom_point(size=3) +
+  xlab("Idade") +                             
+  ylab("Salário") +                                  
+  ggtitle("Frequência das respostas de atrito por Salário e idade")
+```
+
+```{r}
+dados %>%
+ggplot(aes(x=DistanceFromHome, y=MonthlyIncome, col=Attrition)) +
+  geom_point(size=2) +
+  xlab("Idade") +                             
+  ylab("Salário") +                                  
+  ggtitle("Frequência das respostas de atrito por ")
+```
+
+
+### Separar o banco em duas parte, uma para treinar o modelo e o outro para testar o modelo
+### Não foi dividido ainda
+
+```{r}
+dados$Attrition = factor(dados$Attrition, levels = c('No','Yes'))
+fit = rpart(formula = dados$Attrition ~ ., method = 'class', data = dados, parms = list(split = 'gini'), cp = 0.01) #, control = repart.control(minsplit = 1, minbucket = 1, maxdepth = 25)
+
+boxplot(fit$variable.importance)
+
+fit$cptable
+printcp(fit)
+plotcp(fit)
+
+```
+
+```{r}
+rpart.plot(fit, type=0, extra=101, box.palette="gray", branch.lty = 3, shadow.col = "green", nn=TRUE, cex=1)
+```
+
