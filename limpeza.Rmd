@@ -1,5 +1,5 @@
 ---
-title: "limpeza e transformação dasdos dados"
+title: "limpeza e analise dos dados"
 output: pdf_document
 ---
 
@@ -196,11 +196,17 @@ fit$variable.importance
 fit$cptable
 printcp(fit)
 plotcp(fit)
+```
 
+
+```{r}
 predict(fit, newdata = train, type = "class") %>%
   table(train$Attrition, .) %>%
   confusionMatrix()
+```
 
+
+```{r}
 predict(fit, newdata = test, type = "class") %>%
   table(test$Attrition, .) %>%
   confusionMatrix()
