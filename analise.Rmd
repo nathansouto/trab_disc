@@ -69,7 +69,7 @@ ggplot(aes(x=DistanceFromHome, y=MonthlyIncome, col=Attrition)) +
 dados$Attrition = factor(dados$Attrition, levels = c('No','Yes'))
 fit = rpart(formula = dados$Attrition ~ ., method = 'class', data = dados, parms = list(split = 'information'), cp = 0.01) #, control = repart.control(minsplit = 1, minbucket = 1, maxdepth = 25)
 
-boxplot(fit$variable.importance)
+fit$variable.importance
 
 fit$cptable
 printcp(fit)

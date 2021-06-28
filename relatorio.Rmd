@@ -82,6 +82,8 @@ Resumo Resumo Resumo
 
 # Introdução
 
+\cite{koerich, patel2014decisiontree, singh2014analysis}.
+
 # Objetivo
 
 # Dados

@@ -46,15 +46,38 @@ output: pdf_document
   
 ##########################################################################################################
 
+##########################################################################################################
+
+VARIÁVEIS NÃO-SUBJETIVAS E PEGANDO SOMENTE O MONTHLY INCOME (em salários)
+
+##########################################################################################################
+
+  Attrition-Atrito = categórica (No Yes)
+  Age-Idade = contínua (18 - 60)
+  BusinessTravel-Viagem = categórica (non-travel travel_rarely travel_frequently)
+  Department-Departamento = categórica (RH Research&Development Sales)
+  DistanceFromHome-Distancia = numérica (1 - 29)
+  Education-Educacao = numérica (1 - 5)
+  EducationField-faculdade = categórica (RH Life_Sciences Marketing Medical Other Technical_Degree)
+  Gender-sexo = categórica (female male)
+  JobLevel-Nivel = numérica (1 - 5)
+  JobRole-Cargo = categórica (Healthcare_Representative RH Laboratory_Technician Manager Manufacturing_Director Research_Director Research_Scientist Sales_Executive Sales_Representative)
+  MonthlyIncome-rendaMensal = numérica (1009 - 19999)
+  TotalWorkingYears-anosquetrabalha = numérica (0 - 40)
+  YearsAtCompany-temponaempresa = numérica (0 - 40)
+  YearsInCurrentRole-anosnafuncao = numérica (0 - 18)
+  YearsSinceLastPromotion-anosultimapromocao = numérica (0 - 15)
+  YearsWithCurrManager-anosatualgerente = numérica (0 - 17)
+  MaritalStatus-relacionamento = categórica (Divorced Married Single )
+  NumCompaniesWorked-qtdEmpresaTrabalho = numérica (0 - 9)
+  OverTime-horaExtra = categórica (No Yes)
+  PercentSalaryHike-%aumentoSal = numérica (11 - 25)
+  TrainingTimesLastYear-tempotreinamento = numérica (0 - 6)
+  EmployeeNumber-quantidadefuncionarios = numérica (1 - 2068)
 
 
 ```{r}
 library(tidyverse)
-
-#ID3
-require(readxl)
-require(rpart)
-require(rpart.plot)
 ```
 
 ```{r}
@@ -62,8 +85,37 @@ dados <- read_csv("WA_Fn-UseC_-HR-Employee-Attrition.csv")
 ```
 
 ```{r}
-dados = dados %>%
-  select(-c(EmployeeCount, Over18, StandardHours))
+summary(dados)
 
+# dados$Education[dados$Education == 1] <- "Bellow College"
+# dados$Education[dados$Education == 2] <- "College"
+# dados$Education[dados$Education == 3] <- "Bachelhor"
+# dados$Education[dados$Education == 4] <- "Master"
+# dados$Education[dados$Education == 5] <- "Doctor"
+# 
+# dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 1] <- "Low"
+# dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 2] <- "Medium"
+# dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 3] <- "High"
+# dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 4] <- "Very High"
+# 
+# dados$JobInvolvement[dados$JobInvolvement == 1] <- "Low"
+# dados$JobInvolvement[dados$JobInvolvement == 2] <- "Medium"
+# dados$JobInvolvement[dados$JobInvolvement == 3] <- "High"
+# dados$JobInvolvement[dados$JobInvolvement == 4] <- "Very High"
+# 
+# dados$JobSatisfaction[dados$JobSatisfaction == 1] <- "Low"
+# dados$JobSatisfaction[dados$JobSatisfaction == 2] <- "Medium"
+# dados$JobSatisfaction[dados$JobSatisfaction == 3] <- "High"
+# dados$JobSatisfaction[dados$JobSatisfaction == 4] <- "Very High"
+# 
+# dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 1] <- "Low"
+# dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 2] <- "Medium"
+# dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 3] <- "High"
+# dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 4] <- "Very High"
+# 
+# dados$PerformanceRating[dados$PerformanceRating == 1] <- "Low"
+# dados$PerformanceRating[dados$PerformanceRating == 2] <- "Good"
+# dados$PerformanceRating[dados$PerformanceRating == 3] <- "Excellent"
+# dados$PerformanceRating[dados$PerformanceRating == 4] <- "Very High"
 ```
 
