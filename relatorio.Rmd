@@ -98,6 +98,8 @@ Vamos traduzir todos?
 
 Descrição dos dados com as devidas análises explorátorias (analise geral por cima de todos, descrição dos dados e relação com o desgaste).
 
+Tabelas de contingência?
+
 # Metodologia 
 
 --> Parte mais importante segundo a hildete
