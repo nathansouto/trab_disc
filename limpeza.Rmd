@@ -219,5 +219,5 @@ predict(fit, newdata = test, type = "class") %>%
 ```
 
 ```{r}
-rpart.plot(fit, type=0, extra=101, box.palette="gray", branch.lty = 3, nn=TRUE, cex=0.5)
+rpart.plot(fit, type=0, extra=101, box.palette="gray", branch.lty = 3, nn=TRUE, cex=1)
 ```

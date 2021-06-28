@@ -92,7 +92,7 @@ Abrir a discussão sobre o desgaste dos funcionários - O que é isso? O que ela
 
 "Sabendo da realidade do desgate de funcinários e seus problemas, foi (ou será) realizado uma análise e previsão ..."
 
-# Dados
+# Dados --> Natainá
 
 Descrição dos dados com as devidas análises explorátorias (analise geral por cima de todos, descrição dos dados e relação com o desgaste).
 
@@ -100,7 +100,7 @@ Vamos traduzir todos!
 
 Tabelas de contingência + gráficos
 
-# Metodologia 
+# Metodologia --> Curi e Nate
 
 --> Parte mais importante segundo a hildete
 
@@ -110,7 +110,7 @@ Tabelas de contingência + gráficos
 
 - Validação utilizada --> hold-out
 
-# Aplicação
+# Aplicação --> Curi e Nate
 
 Mostrar os resultados da aplicação do modelo
 
