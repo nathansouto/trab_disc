@@ -183,11 +183,17 @@ ggplot(aes(x=DistanceFromHome, y=MonthlyIncome, col=Attrition)) +
 
 ### Separar o banco em duas parte, uma para treinar o modelo e o outro para testar o modelo
 
+# Validação Hold-out
+
 ```{r}
 dados$Attrition = factor(dados$Attrition, levels = c('No','Yes'))
 
-train <- dados[1:900,]
-test <- dados[901:1470,]
+set.seed(12345)
+
+amostra <- sample(1:1470, (2/3)*1470)
+
+train <- dados[amostra,]
+test <- dados[-amostra,]
 
 fit = rpart(formula = Attrition ~ ., method = 'class', data = train, parms = list(split = 'information')) #, control = repart.control(minsplit = 1, minbucket = 1, maxdepth = 25)
 
@@ -213,5 +219,5 @@ predict(fit, newdata = test, type = "class") %>%
 ```
 
 ```{r}
-rpart.plot(fit, type=0, extra=101, box.palette="gray", branch.lty = 3, shadow.col = "green", nn=TRUE, cex=1)
+rpart.plot(fit, type=0, extra=101, box.palette="gray", branch.lty = 3, nn=TRUE, cex=0.5)
 ```
