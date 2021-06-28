@@ -49,8 +49,8 @@ options(
 {\large Instituto de Matemática, Estatística e Computação Científica}\\[0.2cm] 
 {\large Departamento de Estatística - ME714}\\[4cm]
 
-{\bf \huge Título}\\
-{\bf \Large Relatório}\\[6cm]
+{\bf \huge Desgaste de funcionários e suas possíveis causas: uma análise e previsão utilizando árvore de decisão ID3}\\
+{\bf \Large Trabalho Final - Grupo 14}\\[6cm]
 
 
 
@@ -82,19 +82,39 @@ Resumo Resumo Resumo
 
 # Introdução
 
+Abrir a discussão sobre o desgaste dos funcionários - O que é isso? O que ela afeta? É uma realidade no Mundo, no Brasil?
+
 \cite{koerich, patel2014decisiontree, singh2014analysis}.
+
+--> Falar também sobre o método de arvóre de decisão ID3 (porque utilizar? vantagens?)
 
 # Objetivo
 
-# Dados
-
-# Metodologia
+"Sabendo da realidade do desgate de funcinários e seus problemas, foi (ou será) realizado uma análise e previsão ..."
 
 # Dados
+
+Vamos traduzir todos?
+
+Descrição dos dados com as devidas análises explorátorias (analise geral por cima de todos, descrição dos dados e relação com o desgaste).
+
+# Metodologia 
+
+--> Parte mais importante segundo a hildete
+
+- Arvore de Decisao ID3 (explicar cada detalhe)
+  - Entropia
+  - Information Gain
+
+- Validação utilizada --> hold-out ou k-folds?
 
 # Aplicação
 
-# Discussão
+Mostrar os resultados da aplicação do modelo
+
+# Conclusão
+
+Comentar os resultados (tendência para não atrito)
 
 \clearpage
 \bibliographystyle{plain}
