@@ -94,11 +94,11 @@ Abrir a discussão sobre o desgaste dos funcionários - O que é isso? O que ela
 
 # Dados
 
-Vamos traduzir todos?
-
 Descrição dos dados com as devidas análises explorátorias (analise geral por cima de todos, descrição dos dados e relação com o desgaste).
 
-Tabelas de contingência?
+Vamos traduzir todos!
+
+Tabelas de contingência + gráficos
 
 # Metodologia 
 
@@ -108,7 +108,7 @@ Tabelas de contingência?
   - Entropia
   - Information Gain
 
-- Validação utilizada --> hold-out ou k-folds?
+- Validação utilizada --> hold-out
 
 # Aplicação
 
@@ -116,7 +116,7 @@ Mostrar os resultados da aplicação do modelo
 
 # Conclusão
 
-Comentar os resultados (tendência para não atrito)
+Comentar os resultados (tendência para não desgaste)
 
 \clearpage
 \bibliographystyle{plain}

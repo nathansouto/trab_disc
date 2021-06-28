@@ -90,7 +90,7 @@ dados <- read_csv("WA_Fn-UseC_-HR-Employee-Attrition.csv")
 ```
 
 ```{r}
-summary(dados)
+# colnames(dados) <- c("Idade")
 
 dados$Education[dados$Education == 1] <- "Bellow College"
 dados$Education[dados$Education == 2] <- "College"
