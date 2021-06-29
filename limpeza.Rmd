@@ -87,52 +87,102 @@ require(rpart.plot)
 
 ```{r}
 dados <- read_csv("WA_Fn-UseC_-HR-Employee-Attrition.csv")
-```
-
-```{r}
-# colnames(dados) <- c("Idade")
-
-dados$Education[dados$Education == 1] <- "Bellow College"
-dados$Education[dados$Education == 2] <- "College"
-dados$Education[dados$Education == 3] <- "Bachelhor"
-dados$Education[dados$Education == 4] <- "Master"
-dados$Education[dados$Education == 5] <- "Doctor"
-
-dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 1] <- "Low"
-dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 2] <- "Medium"
-dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 3] <- "High"
-dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 4] <- "Very High"
-
-dados$JobInvolvement[dados$JobInvolvement == 1] <- "Low"
-dados$JobInvolvement[dados$JobInvolvement == 2] <- "Medium"
-dados$JobInvolvement[dados$JobInvolvement == 3] <- "High"
-dados$JobInvolvement[dados$JobInvolvement == 4] <- "Very High"
-
-dados$JobSatisfaction[dados$JobSatisfaction == 1] <- "Low"
-dados$JobSatisfaction[dados$JobSatisfaction == 2] <- "Medium"
-dados$JobSatisfaction[dados$JobSatisfaction == 3] <- "High"
-dados$JobSatisfaction[dados$JobSatisfaction == 4] <- "Very High"
-
-dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 1] <- "Low"
-dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 2] <- "Medium"
-dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 3] <- "High"
-dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 4] <- "Very High"
-
-dados$PerformanceRating[dados$PerformanceRating == 1] <- "Low"
-dados$PerformanceRating[dados$PerformanceRating == 2] <- "Good"
-dados$PerformanceRating[dados$PerformanceRating == 3] <- "Excellent"
-dados$PerformanceRating[dados$PerformanceRating == 4] <- "Very High"
-```
-
-```{r}
 dados = dados %>%
   select(-c(EmployeeCount, Over18, StandardHours))
+```
+
+```{r}
+dados$Attrition[dados$Attrition == 'Yes'] <- "Sim"
+dados$Attrition[dados$Attrition == 'No'] <- "Nao"
+
+dados$BusinessTravel[dados$BusinessTravel == 'Non-Travel'] <- "Nao Viaja"
+dados$BusinessTravel[dados$BusinessTravel == 'Travel_Rarely'] <- "Viaja Raramente"
+dados$BusinessTravel[dados$BusinessTravel == 'Travel_Frequently'] <- "Viaja Frequentemente"
+
+dados$Department[dados$Department == 'Research & Development'] <- "Pesquisa e desenvolvimento"  
+dados$Department[dados$Department == 'Sales'] <- "Vendas"  
+dados$Department[dados$Department == 'Human Resources'] <- "RH"  
+
+dados$EducationField[dados$EducationField == 'Human Resources'] <- "RH" 
+dados$EducationField[dados$EducationField == 'Life Sciences'] <- "Ciencias" 
+dados$EducationField[dados$EducationField == 'Marketing'] <- "Marketing" 
+dados$EducationField[dados$EducationField == 'Technical Degree'] <- "Grau Tecnico" 
+dados$EducationField[dados$EducationField == 'Medical'] <- "Medicina" 
+dados$EducationField[dados$EducationField == 'Other'] <- "Outros"
+
+dados$Gender[dados$Gender == 'Male'] <- "Masculino"  
+dados$Gender[dados$Gender == 'Female'] <- "Feminino"  
+
+dados$JobRole[dados$JobRole == 'Healthcare Representative'] <- "Assistente Medico" 
+dados$JobRole[dados$JobRole == 'Laboratory Technician'] <- "Tecnico de Laboratorio" 
+dados$JobRole[dados$JobRole == 'Human Resources'] <- "RH" 
+dados$JobRole[dados$JobRole == 'Manager'] <- "Gerente" 
+dados$JobRole[dados$JobRole == 'Manufacturing Director'] <- "Manufatura" 
+dados$JobRole[dados$JobRole == 'Research Director'] <- "Pesquisador" 
+dados$JobRole[dados$JobRole == 'Research Scientist'] <- "Pesquisador" 
+dados$JobRole[dados$JobRole == 'Sales Executive'] <- "Vendedor" 
+dados$JobRole[dados$JobRole == 'Sales Representative'] <- "Vendedor"
+
+dados$MaritalStatus[dados$MaritalStatus == 'Single'] <- "Solteiro(a)"  
+dados$MaritalStatus[dados$MaritalStatus == 'Married'] <- "Casado(a)"  
+dados$MaritalStatus[dados$MaritalStatus == 'Divorced'] <- "Divorciado(a)"  
+
+dados$OverTime[dados$OverTime == 'Yes'] <- "Sim"  
+dados$OverTime[dados$OverTime == 'No'] <- "Nao"  
+
+dados$Education[dados$Education == 1] <- "< Medio"
+dados$Education[dados$Education == 2] <- "Superior"
+dados$Education[dados$Education == 3] <- "Bacharel"
+dados$Education[dados$Education == 4] <- "Mestrado"
+dados$Education[dados$Education == 5] <- "Doutorado"
+
+dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 1] <- "Baixo"
+dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 2] <- "Medio"
+dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 3] <- "Alto"
+dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 4] <- "Muito Alto"
+
+dados$JobInvolvement[dados$JobInvolvement == 1] <- "Baixo"
+dados$JobInvolvement[dados$JobInvolvement == 2] <- "Medio"
+dados$JobInvolvement[dados$JobInvolvement == 3] <- "Alto"
+dados$JobInvolvement[dados$JobInvolvement == 4] <- "Muito Alto"
+
+dados$JobSatisfaction[dados$JobSatisfaction == 1] <- "Baixo"
+dados$JobSatisfaction[dados$JobSatisfaction == 2] <- "Medio"
+dados$JobSatisfaction[dados$JobSatisfaction == 3] <- "Alto"
+dados$JobSatisfaction[dados$JobSatisfaction == 4] <- "Muito Alto"
+
+dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 1] <- "Baixo"
+dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 2] <- "Medio"
+dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 3] <- "Alto"
+dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 4] <- "Muito Alto"
+
+dados$PerformanceRating[dados$PerformanceRating == 1] <- "Baixo"
+dados$PerformanceRating[dados$PerformanceRating == 2] <- "Medio"
+dados$PerformanceRating[dados$PerformanceRating == 3] <- "Alto"
+dados$PerformanceRating[dados$PerformanceRating == 4] <- "Muito Alto"
+```
+
+```{r}
+colnames(dados) <- c("idade", "atrito", "viagemTrabalho", 
+                     "diaria", "departamento", "distanciaCasa",
+                     "educacao", "areaEducacao", "numeroEmpregados",
+                     "satisfacaoAmbiental", "sexo", "taxaHoraria", 
+                     "envolvimentoTrabalho", "nivelTrabalho", "cargo",
+                     "satisfacaoTrabalho", "statusRelacionamento", "renda",
+                     "taxaMensal", "nEmpresasTrabalhadas", "horaExtra", 
+                     "aumentoSalarial", "desempenho", "satisfacaoRelacionamento",
+                     "acoes", "anosColaboracao", "treinamentoAnoPassado",
+                     "equilibrioVidaTrabalho", "anosNaEmpresa", "anosNaFuncao",
+                     "anosUltimaPromocao", "anosMesmoGerente")
+```
+
+```{r}
 
 ```
 
 ```{r}
 dados %>%
-  group_by(Attrition) %>%
+  group_by(atrito) %>%
   summarise(n = n()) %>%
   mutate(freq = n / sum(n)) 
 ```
@@ -140,10 +190,10 @@ dados %>%
 Acho que pode ser uma tabela
 ```{r}
 dados %>%
-  group_by(Gender, Attrition) %>%
+  group_by(sexo, atrito) %>%
   summarise(n = n()) %>%
   mutate(freq = n / sum(n)) %>%
-  ggplot(aes(x=Gender, fill=Attrition)) +
+  ggplot(aes(x=sexo, fill=atrito)) +
   geom_bar(size=3, position="dodge", aes(y = freq), stat = 'identity') +
   xlab("Atrito") +                             
   ylab("Frequência relativa") +                                  
@@ -152,10 +202,10 @@ dados %>%
 
 ```{r}
 dados %>%
-  group_by(JobRole, Attrition) %>%
+  group_by(cargo, atrito) %>%
   summarise(n = n()) %>%
   mutate(freq = n / sum(n)) %>%
-  ggplot(aes(x=Attrition, fill=JobRole)) +
+  ggplot(aes(x=atrito, fill=cargo)) +
   geom_bar(size=3, position="dodge", aes(y = freq), stat = 'identity') +
   xlab("Atrito") +                             
   ylab("Frequência relativa") +                                  
@@ -164,7 +214,7 @@ dados %>%
 
 ```{r}
 dados %>%
-ggplot(aes(x=Age, y=MonthlyIncome, col=Attrition)) +
+ggplot(aes(x=idade, y=renda, col=atrito)) +
   geom_point(size=3) +
   xlab("Idade") +                             
   ylab("Salário") +                                  
@@ -173,11 +223,11 @@ ggplot(aes(x=Age, y=MonthlyIncome, col=Attrition)) +
 
 ```{r}
 dados %>%
-ggplot(aes(x=DistanceFromHome, y=MonthlyIncome, col=Attrition)) +
+ggplot(aes(x=distanciaCasa, y=renda, col=atrito)) +
   geom_point(size=2) +
-  xlab("Idade") +                             
+  xlab("Distancia casa") +                             
   ylab("Salário") +                                  
-  ggtitle("Frequência das respostas de atrito por ")
+  ggtitle("Frequência das respostas de atrito por distancia e renda")
 ```
 
 
@@ -186,7 +236,7 @@ ggplot(aes(x=DistanceFromHome, y=MonthlyIncome, col=Attrition)) +
 # Validação Hold-out
 
 ```{r}
-dados$Attrition = factor(dados$Attrition, levels = c('No','Yes'))
+dados$atrito = factor(dados$atrito, levels = c('Sim','Nao'))
 
 set.seed(12345)
 
@@ -195,7 +245,7 @@ amostra <- sample(1:1470, (2/3)*1470)
 train <- dados[amostra,]
 test <- dados[-amostra,]
 
-fit = rpart(formula = Attrition ~ ., method = 'class', data = train, parms = list(split = 'information')) #, control = repart.control(minsplit = 1, minbucket = 1, maxdepth = 25)
+fit = rpart(formula = atrito ~ ., method = 'class', data = train, parms = list(split = 'information'))
 
 fit$variable.importance
 
@@ -207,14 +257,14 @@ plotcp(fit)
 
 ```{r}
 predict(fit, newdata = train, type = "class") %>%
-  table(train$Attrition, .) %>%
+  table(train$atrito, .) %>%
   confusionMatrix()
 ```
 
 
 ```{r}
 predict(fit, newdata = test, type = "class") %>%
-  table(test$Attrition, .) %>%
+  table(test$atrito, .) %>%
   confusionMatrix()
 ```
 
