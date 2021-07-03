@@ -163,22 +163,22 @@ dados$PerformanceRating[dados$PerformanceRating == 4] <- "Muito Alto"
 ```
 
 ```{r}
-colnames(dados) <- c("idade", "atrito", "viagemTrabalho", 
-                     "diaria", "departamento", "distanciaCasa",
-                     "educacao", "areaEducacao", "numeroEmpregados",
-                     "satisfacaoAmbiental", "sexo", "taxaHoraria", 
-                     "envolvimentoTrabalho", "nivelTrabalho", "cargo",
-                     "satisfacaoTrabalho", "statusRelacionamento", "renda",
-                     "taxaMensal", "nEmpresasTrabalhadas", "horaExtra", 
-                     "aumentoSalarial", "desempenho", "satisfacaoRelacionamento",
-                     "acoes", "anosColaboracao", "treinamentoAnoPassado",
-                     "equilibrioVidaTrabalho", "anosNaEmpresa", "anosNaFuncao",
-                     "anosUltimaPromocao", "anosMesmoGerente")
+colnames(dados) <- c("Idade", "Desgaste", "ViagemTrabalho", 
+                     "Diaria", "Departamento", "DistanciaCasa",
+                     "Educacao", "AreaEducacao", "NumeroEmpregados",
+                     "SatisfacaoAmbiental", "Sexo", "TaxaHoraria", 
+                     "EnvolvimentoTrabalho", "NivelTrabalho", "Cargo",
+                     "SatisfacaoTrabalho", "StatusRelacionamento", "Renda",
+                     "TaxaMensal", "NumEmpresasTrabalhadas", "HoraExtra", 
+                     "AumentoSalarial", "Desempenho", "SatisfacaoRelacionamento",
+                     "Acoes", "AnosColaboracao", "TreinamentoAnoPassado",
+                     "EquilibrioVidaTrabalho", "AnosNaEmpresa", "AnosNaFuncao",
+                     "AnosUltimaPromocao", "AnosMesmoGerente")
 ```
 
 ```{r}
 dados %>%
-  group_by(atrito) %>%
+  group_by(Desgaste) %>%
   summarise(n = n()) %>%
   mutate(freq = n / sum(n)) 
 ```
@@ -193,23 +193,23 @@ Acho que pode ser uma tabela
 
 ```{r}
 dados %>%
-  group_by(cargo, atrito) %>%
+  group_by(Cargo, Desgaste) %>%
   summarise(n = n()) %>%
   mutate(freq = n / sum(n)) %>%
-  ggplot(aes(x=atrito, fill=cargo)) +
+  ggplot(aes(x=Desgaste, fill=Cargo)) +
   geom_bar(size=3, position="dodge", aes(y = freq), stat = 'identity') +
-  xlab("Atrito") +                             
+  xlab("Desgaste") +                             
   ylab("Frequência relativa") +                                  
-  ggtitle("Frequência realtiva das respostas de atrito por cargo")
+  ggtitle("Frequência realtiva das respostas de desgaste por cargo")
 ```
 
 ```{r}
 dados %>%
-ggplot(aes(x=idade, y=renda, col=atrito)) +
+ggplot(aes(x=Idade, y=Renda, col=Desgaste)) +
   geom_point(size=3) +
   xlab("Idade") +                             
   ylab("Salário") +                                  
-  ggtitle("Frequência das respostas de atrito por Salário e idade")
+  ggtitle("Frequência das respostas de desgaste por Salário e idade")
 ```
 
 
@@ -218,16 +218,16 @@ ggplot(aes(x=idade, y=renda, col=atrito)) +
 # Validação Hold-out
 
 ```{r}
-dados$atrito = factor(dados$atrito, levels = c('Sim','Nao'))
+dados$Desgaste = factor(dados$Desgaste, levels = c('Sim','Nao'))
 
 set.seed(12345)
 
-amostra <- sample(1:1470, (2/3)*1470)
+amostra <- sample(1:nrow(dados), (2/3)*1470)
 
 train <- dados[amostra,]
 test <- dados[-amostra,]
 
-fit = rpart(formula = atrito ~ ., method = 'class', data = train, parms = list(split = 'information'))
+fit = rpart(formula = Desgaste ~ ., method = 'class', data = train, parms = list(split = 'information'))
 
 fit$variable.importance
 
@@ -239,14 +239,14 @@ plotcp(fit)
 
 ```{r}
 predict(fit, newdata = train, type = "class") %>%
-  table(train$atrito, .) %>%
+  table(train$Desgaste, .) %>%
   confusionMatrix()
 ```
 
 
 ```{r}
 predict(fit, newdata = test, type = "class") %>%
-  table(test$atrito, .) %>%
+  table(test$Desgaste, .) %>%
   confusionMatrix()
 ```
 
