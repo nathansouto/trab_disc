@@ -177,10 +177,6 @@ colnames(dados) <- c("idade", "atrito", "viagemTrabalho",
 ```
 
 ```{r}
-
-```
-
-```{r}
 dados %>%
   group_by(atrito) %>%
   summarise(n = n()) %>%
@@ -189,15 +185,10 @@ dados %>%
 
 Acho que pode ser uma tabela
 ```{r}
-dados %>%
-  group_by(sexo, atrito) %>%
-  summarise(n = n()) %>%
-  mutate(freq = n / sum(n)) %>%
-  ggplot(aes(x=sexo, fill=atrito)) +
-  geom_bar(size=3, position="dodge", aes(y = freq), stat = 'identity') +
-  xlab("Atrito") +                             
-  ylab("Frequência relativa") +                                  
-  ggtitle("Frequência relativa das respostas de atrito por sexo")
+##tabela <- table(dados$sexo, dados$atrito)
+
+##ggplot(dados, aes(x = horaExtra, fill = atrito)) + geom_bar() + 
+##    coord_flip() + guides(fill = FALSE)
 ```
 
 ```{r}
@@ -219,15 +210,6 @@ ggplot(aes(x=idade, y=renda, col=atrito)) +
   xlab("Idade") +                             
   ylab("Salário") +                                  
   ggtitle("Frequência das respostas de atrito por Salário e idade")
-```
-
-```{r}
-dados %>%
-ggplot(aes(x=distanciaCasa, y=renda, col=atrito)) +
-  geom_point(size=2) +
-  xlab("Distancia casa") +                             
-  ylab("Salário") +                                  
-  ggtitle("Frequência das respostas de atrito por distancia e renda")
 ```
 
 

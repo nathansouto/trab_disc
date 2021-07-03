@@ -95,10 +95,10 @@ Abrir a discussão sobre o desgaste dos funcionários - O que é isso? O que ela
 # Dados --> Natainá
 
 Descrição dos dados com as devidas análises explorátorias (analise geral por cima de todos, descrição dos dados e relação com o desgaste).
-
-Vamos traduzir todos!
-
 Tabelas de contingência + gráficos
+
+O banco de dados conta com 35 variáveis e 1470 observações. As variáveis são relacionadas ao trabalho e algumas da vida pessoal dos funcionários. 
+As principais variáveis que foram mais performática para o modelo de árvore de decisão são:horaExtra (Se o funcionário costuma ou não fazer horas extras no trabalho), statusRelacionamento (qual é o status do relacionamento do indivíduo), anosColaboracao (o tempo de colaboração na vida), cargo, nivelTrabalho (nivel do plano  de carreira do funcionário), viagemTrabalho (frequência de viagens a trabalho), diaria, anosNaEmpresa (tempo que está na empresa), satisfacaoTrabalho, departamento, nEmpresasTrabalhadas (quantidade de empresas que trabalhou na vida), renda e numeroEmpregados.
 
 # Metodologia --> Curi e Nate
 
