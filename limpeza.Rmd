@@ -185,10 +185,14 @@ dados %>%
 
 Acho que pode ser uma tabela
 ```{r}
-##tabela <- table(dados$sexo, dados$atrito)
+with(dados, table(Desgaste, Sexo))
 
-##ggplot(dados, aes(x = horaExtra, fill = atrito)) + geom_bar() + 
-##    coord_flip() + guides(fill = FALSE)
+with(dados, table(StatusRelacionamento, Desgaste))
+
+with(dados, table(HoraExtra, Desgaste))
+
+t = with(dados, ftable(Sexo, StatusRelacionamento, Desgaste))
+prop.table(t)
 ```
 
 ```{r}
@@ -200,7 +204,7 @@ dados %>%
   geom_bar(size=3, position="dodge", aes(y = freq), stat = 'identity') +
   xlab("Desgaste") +                             
   ylab("Frequência relativa") +                                  
-  ggtitle("Frequência realtiva das respostas de desgaste por cargo")
+  ggtitle("Frequência relativa das respostas de desgaste por cargo")
 ```
 
 ```{r}
@@ -210,6 +214,18 @@ ggplot(aes(x=Idade, y=Renda, col=Desgaste)) +
   xlab("Idade") +                             
   ylab("Salário") +                                  
   ggtitle("Frequência das respostas de desgaste por Salário e idade")
+```
+
+```{r}
+dados %>%
+  group_by(ViagemTrabalho, Desgaste) %>%
+  summarise(n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  ggplot(aes(x=Desgaste, fill=ViagemTrabalho)) +
+  geom_bar(size=3, position="dodge", aes(y = freq), stat = 'identity') +
+  xlab("Desgaste") +                             
+  ylab("Frequência relativa") +                                  
+  ggtitle("Frequência relativa de desgaste pela frequência de viajar pelo Trabalho")
 ```
 
 
