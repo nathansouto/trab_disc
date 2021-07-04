@@ -168,7 +168,7 @@ HoraExtra                    & Se o funcionário costuma ou não fazer horas ext
 StatusRelacionamento         & Status do relacionamento do funcionário                         \\
 AnosColaboracao              & Quantidade de anos de colaboração                               \\
 Cargo                        & Cargo na empresa                                                \\
-NivelTrabalho                & Nivél do plano de carreira atual                                \\
+NivelTrabalho                & Nível do plano de carreira atual                                \\
 ViagemTrabalho               & Frequência de viagens a trabalho                                \\
 AnosNaEmpresa                & Quantidade de anos na empresa                                   \\
 Diaria                       & Salário bruto diário                                            \\
@@ -278,7 +278,7 @@ Para entender e visualizar melhor os dados e as variáveis, serão apresentadas 
 
 Na tabela \ref{tab:desgaste}, tem-se a quantidade de resgistros para cada tipo de resposta da variável Desgaste, assim como a proporção de cada resposta.
 
-\begin{table}[ht]
+\begin{table}[H]
 \centering
 \caption{Hora Extra (a esquerda) X Desgaste (em cima).}\label{tab:desgaste}
 \begin{tabular}{rrr}
@@ -300,7 +300,7 @@ Na tabela \ref{tab:desg_hrex}, encontra-se a relação entre a resposta de desga
 #  xtable::xtable()
 ```
 
-\begin{table}[ht]
+\begin{table}[H]
 \centering
 \caption{Hora Extra (a esquerda) X Desgaste (em cima).}\label{tab:desg_hrex}
 \begin{tabular}{rrr}
@@ -318,7 +318,7 @@ Percebe-se que os funcionários que fazem horas extras tem uma probabilidade mai
 
 Na tabela \ref{tab:desg_status}, encontra-se a relação entre a resposta de desgaste e a variável de status do relacionamento através de uma tabela de contingência.
 
-\begin{table}[ht]
+\begin{table}[H]
 \centering
 \caption{Status Relacionamento (a esquerda) X Desgaste (em cima).}\label{tab:desg_status}
 \begin{tabular}{rrr}
@@ -335,7 +335,7 @@ Percebe-se que os funcionários que são solteiros tem uma probabilidade maior d
 
 Na tabela \ref{tab:desg_cargo}, encontra-se a relação entre a resposta de desgaste e a variável de cargo através de uma tabela de contingência.
 
-\begin{table}[ht]
+\begin{table}[H]
 \centering
 \caption{Cargo (a esquerda) X Desgaste (em cima).}\label{tab:desg_cargo}
 \begin{tabular}{rrr}
@@ -353,7 +353,7 @@ Percebe-se que os funcionários que são pesquisadores ou tecnicos de laboratór
 
 Na tabela \ref{tab:desg_viaja}, encontra-se a relação entre a resposta de desgaste e a variável de cargo através de uma tabela de contingência.
 
-\begin{table}[ht]
+\begin{table}[H]
 \centering
 \caption{Viaja a trabalho (a esquerda) X Desgaste (em cima).}\label{tab:desg_viaja}
 \begin{tabular}{rrr}
@@ -371,7 +371,7 @@ Percebe-se que os funcionários que viaja frequentemente tem uma probabilidade m
 
 Na tabela \ref{tab:desg_satistrab}, encontra-se a relação entre a resposta de desgaste e a variável de satisfação no trabalho através de uma tabela de contingência.
 
-\begin{table}[ht]
+\begin{table}[H]
 \centering
 \caption{Satisfação no trabalho (a esquerda) X Desgaste (em cima).}\label{tab:desg_satistrab}
 \begin{tabular}{rrr}
@@ -388,20 +388,20 @@ Percebe-se que os funcionários que tem uma satisfação muito alta no trabalho 
 
 Na tabela \ref{tab:desg_depar}, encontra-se a relação entre a resposta de desgaste e a variável de departamento através de uma tabela de contingência.
 
-\begin{table}[ht]
+\begin{table}[H]
 \centering
 \caption{Departamento (a esquerda) X Desgaste (em cima).}\label{tab:desg_depar}
 \begin{tabular}{rrr}
   \hline
  & Nao & Sim \\ 
   \hline
-Vendas & 0.751 & 0.249 \\ 
- & 0.859 & 0.141 \\ 
+Vendas & 0.794 & 0.206 \\ 
+Outros departamentos & 0.858 & 0.142 \\ 
    \hline
 \end{tabular}
 \end{table}
 
-Percebe-se que os funcionários que viaja frequentemente tem uma probabilidade maior de ter desgaste no serviço do que aqueles que não viaja ou viaja raramente.
+Percebe-se que os funcionários que pertencem ao departamento de vendas tem uma probabilidade maior de ter desgaste no serviço do que aqueles que pertence ao RH ou ao departamento de pesquisa e desenvolvimento.
 
 
 Olhando um pouco para uma variável sexo, na tabela \ref{tab:desg_sexo}, foi construída uma tabela de contingência entre ela e o desgaste.
@@ -418,17 +418,14 @@ Olhando um pouco para uma variável sexo, na tabela \ref{tab:desg_sexo}, foi con
   \hline
  & Nao & Sim \\ 
   \hline
-Feminino & 501 &  87 \\ 
-  Masculino & 732 & 150 \\ 
+Feminino & 0.852 &  0.148 \\ 
+  Masculino & 0.830 & 0.170 \\ 
    \hline
 \end{tabular}
 \end{table}
 
-Calculando a porcentagem de resposta sim para cada um dos sexos, tem-se 17,4% e 20,5% para o sexo feminino e masculino respectivamente. Nota-se que não é uma diferença significativa, ou seja, a variável sexo não é uma variável significativa para decidir sobre o desgaste dos funcionários.
-
-
-
-
+A partir da tabela, tem-se que as porcentagens de resposta sim para os sexos são: 14,8% e 17,0% para o sexo feminino e masculino respectivamente. Nota-se que não é uma diferença significativa, ou seja, a variável sexo não é uma variável significativa para decidir sobre o desgaste dos funcionários. 
+Essa insignificância também ocorre em outras variáveis, como: educação, área de educação, satisfação ambiental, envolvimento no trabalho, entre outras.
 
 # Aplicação
 
