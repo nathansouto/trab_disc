@@ -130,9 +130,9 @@ Neste projeto, será utilizado o algoritmo ID3 desenvolvido por Quinlan \cite{qu
 
 O Information Gain ou Ganho de Informação é uma medida quantitativa dos atributos que mede o quão bem ele separa os exemplos de treinamento de acordo com a classificação alvo. Ele consiste em calcular a redução esperada na entropia causada pela partição dos exemplos de acordo com o atributo. \cite{koerich}
 
-Sua fórmula é $$Gain(A) = I(p,n) - E(A)$$, onde $I(p,n)$ é a entropia de todo conjunto e $E(A)$ é o valor esperado da entropia do atributo A.
+Sua fórmula é $$Gain(A) = I(p,n) - E(A)$$, em que $I(p,n)$ é a entropia de todo conjunto e $E(A)$ é o valor esperado da entropia do atributo A.
 
-A entropia caracteriza a impureza de uma coleção árbitrária de exemplos. Neste algoritmo ela consiste em calcular o número de bits esperados necessários para codificar uma classificação. Como este estudo se atém a variáveis binárias, seu cálculo é $$I(p,n) = - \frac{p}{p+n}log_2\frac{p}{p+n} - \frac{n}{p+n}log_2\frac{n}{p+n}$$, onde $n$ é a quantidade de classificações negativas e $p$ é a quantidade de classificações positivas. A entropia pode ir de 0 a 1, sendo 1 a "maior impureza", obtida quando todas as observações pertencem a somente uma das categorias, e 0 a "menor impureza", quando os dados estão perfeitamente divididos. \cite{quinlan1986induction}
+A entropia caracteriza a impureza de uma coleção árbitrária de exemplos. Neste algoritmo ela consiste em calcular o número de bits esperados necessários para codificar uma classificação. Como este estudo se atém a variáveis binárias, seu cálculo é $$I(p,n) = - \frac{p}{p+n}log_2\frac{p}{p+n} - \frac{n}{p+n}log_2\frac{n}{p+n}$$, em que $n$ é a quantidade de classificações negativas e $p$ é a quantidade de classificações positivas. A entropia pode ir de 0 a 1, sendo 1 a "maior impureza", obtida quando todas as observações pertencem a somente uma das categorias, e 0 a "menor impureza", quando os dados estão perfeitamente divididos. \cite{quinlan1986induction}
 
 Com isso, o valor esperado da entropia do atributo A têm a seguinte fórmula $$E(A) = \sum_{i=1}^v \frac{p_i + n_i}{p + n}I(p_i,n_i)$$, em que $v$ é a quantidade de categorias do atributo A, $n_i$ é a quantidade de classificações negativas na categoria $i$ e $p_i$ é a quantidade de classificações positivas na categoria $i$. \cite{quinlan1986induction}
 
