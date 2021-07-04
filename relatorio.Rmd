@@ -530,7 +530,7 @@ fit = rpart(formula = Desgaste ~ ., method = 'class', data = train, parms = list
 
 A figura \ref{fig:arvore} mostra o resultado da aplicação da árvore de decisão ID3 para o problema proposto, tendo 8 níveis e 15 \emph{nós decisão} em sua estrutura, desencadeando em 16 \emph{nós folha}. Em cada nó de decisão um teste é feito, e se a resposta é "Sim" a árvore segue em sequência para a esquerda em outro nó; caso contrário, a árvore segue à direita. Como mencionado anteriormente, todas as variáveis foram transformadas em atributos categóricos binários para os testes nos \emph{nós decisão}, incluindo as variáveis numéricas. Nos \emph{nós folha}, está a proporção de indíviduos agrupados neles e quantos tiveram ou não desgaste. Por exemplo, o \emph{nó folha} mais a direita agrupou 67% dos funcionários como se não houvessem tido desgaste, porém 55 deles relataram desgaste e 597 realmente não o relataram. Independentemente do \emph{nó folha}, internamente à esquerda está a quantidade de pessoas com desgaste e à direita está a quantidade de pessoas sem desgaste.
 
-```{r arvore, fig.width= 9.5, fig.height= 6, echo=FALSE, fig.cap="Árvore de decisão para o estudo de demissões em empresa.\\label{fig:arvore}",out.width = '70%'}
+```{r arvore, fig.width= 9.5, fig.height= 6, echo=FALSE, fig.cap="Árvore de decisão para o estudo de demissões em empresa.\\label{fig:arvore}"}
 rpart.plot(fit, type=0, extra=101, box.palette="lightgreen", branch.lty = 2, nn=TRUE, cex=0.6, fallen.leaves = F, branch.col = "brown")
 ```
 
