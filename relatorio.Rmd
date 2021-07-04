@@ -435,7 +435,41 @@ Essa insignificância também ocorre em outras variáveis, como: educação, ár
 
 # Aplicação
 
-Mostrar os resultados da aplicação do modelo
+```{r}
+dados$Desgaste = factor(dados$Desgaste, levels = c('Sim','Nao'))
+
+set.seed(12345)
+
+amostra <- sample(1:nrow(dados), (2/3)*1470)
+
+train <- dados[amostra,]
+test <- dados[-amostra,]
+
+fit = rpart(formula = Desgaste ~ ., method = 'class', data = train, parms = list(split = 'information'))
+
+names(fit$variable.importance)
+
+fit$cptable
+printcp(fit)
+plotcp(fit)
+```
+
+```{r}
+predict(fit, newdata = train, type = "class") %>%
+  table(train$Desgaste, .) %>%
+  confusionMatrix()
+```
+
+```{r}
+predict(fit, newdata = test, type = "class") %>%
+  table(test$Desgaste, .) %>%
+  confusionMatrix()
+```
+
+```{r}
+rpart.plot(fit, type=0, extra=101, box.palette="lightgreen", branch.lty = 2, nn=TRUE, cex=0.7, fallen.leaves = F, branch.col = "brown")
+```
+
 
 # Conclusão
 
