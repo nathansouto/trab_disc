@@ -472,6 +472,23 @@ Na tabela \ref{tab:desg_anos}, encontra-se a relação entre a resposta de desga
 
 Tem-se que os funcionários que possuem menos de 2 anos na empresa tem uma probabilidade maior de ter desgaste no serviço do que aqueles que possuem 2 ou mais anos na empresa.
 
+Na tabela \ref{tab:desg_diaria}, encontra-se a relação entre a resposta de desgaste e a variável Diaria.
+
+\begin{table}[H]
+\centering
+\caption{Diaria (a esquerda) X Desgaste (em cima).}\label{tab:desg_diaria}
+\begin{tabular}{rrr}
+  \hline
+ & Não & Sim \\ 
+  \hline
+'< 1324' & 0.839 & 0.161 \\ 
+'>= 1324' & 0.838 & 0.162 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Tem-se que a probabilidade de desgaste para as duas categorias de diária são aproximadamente iguais.
+
 Na tabela \ref{tab:desg_nume}, encontra-se a relação entre a resposta de desgaste e a variável número de empresas trabalhadas pelos funcionários.
 
 \begin{table}[H]
@@ -506,23 +523,6 @@ Na tabela \ref{tab:desg_empr}, encontra-se a relação entre a resposta de desga
 
 Tem-se que os funcionários que trabalham em uma empresa que possui mais de 918 funcionários tem uma probabilidade maior de ter desgaste no serviço do que aqueles que trabalham em uma empresa que tem menos funcionários.
 
-Olhando um pouco para uma variável sexo, na tabela \ref{tab:desg_sexo}, foi construída uma tabela de contingência entre ela e o desgaste.
-
-\begin{table}[H]
-\centering
-\caption{Sexo X Desgaste.}\label{tab:desg_sexo}
-\begin{tabular}{rrr}
-  \hline
- & Não & Sim \\ 
-  \hline
-Feminino & 0.852 &  0.148 \\ 
-  Masculino & 0.830 & 0.170 \\ 
-   \hline
-\end{tabular}
-\end{table}
-
-A partir da tabela, tem-se que as porcentagens de resposta sim para os sexos são: 14,8% e 17,0% para o sexo feminino e masculino respectivamente. Nota-se que não é uma diferença significativa, ou seja, a variável sexo não é uma variável significativa para decidir sobre o desgaste dos funcionários. 
-Essa insignificância também ocorre em outras variáveis, como: educação, área de educação, satisfação ambiental, envolvimento no trabalho, entre outras.
 
 # Aplicação
 
