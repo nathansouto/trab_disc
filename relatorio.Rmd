@@ -109,11 +109,11 @@ Partindo da problemática de desgaste (atrito), o presente relatório tem como p
 
 ## Árvore de Decisão ID3
 
-As Árvores de Decisão são métodos práticos de aprendizagem indutiva para aproximação de funções de valores discretos \cite{koerich}. Algoritmos que utilizam esse método, pertencem à família de algoritmos \emph{Top Down Induction of Decision Trees} - TDIDT, ou seja, árvores que são construídas de cima para baixo. Uma árvore de decisão é uma estrutura de dados definida recursivamente como: \cite{quinlan1986induction, monard2003induccao}
+As Árvores de Decisão são métodos práticos de aprendizagem indutiva para aproximação de funções de valores discretos \cite{koerich}. Uma árvore de decisão é uma estrutura de dados definida recursivamente como: \cite{quinlan1986induction, monard2003induccao}
 
 \begin{enumerate}
-  \item um \emph{nó decisão} que contém um teste sobre algum atributo da instância. Para cada resultado do teste existe uma aresta para uma subárvore. Cada subárvore tem a mesma estrutura que a árvore
-  \item um \emph{nó folha} que corresponde a uma classificação final
+  \item \emph{nó decisão} que contém um teste sobre algum atributo da instância. Para cada resultado do teste existe uma aresta para uma subárvore. Cada subárvore tem a mesma estrutura que a árvore
+  \item \emph{nó folha} que corresponde a uma classificação final
 \end{enumerate}
   
 Na Figura \ref{fig:exemplo} temos um exemplo simples dessa metodologia para o diagnóstico de um paciente. Nela podemos ver os nós citados acima. Os nós em formato redondo são os \emph{nós decisão} e os de formato retangular são os \emph{nós folha}. O primeiro nó da árvore é também chamado de \emph{nó raiz}. \cite{monard2003induccao}
@@ -124,7 +124,7 @@ knitr::include_graphics("imagem_exemplo.png")
 
 Existem diferentes algoritmos de aplicação desse método com diferentes formúlas de escolher os testes nos nós decisão, tipo de variáveis utilizadas, velocidade de execução, entre outros fatores \cite{patel2014decisiontree}.
 
-Neste projeto, será utilizado o algoritmo ID3 desenvolvido por Quinlan \cite{quinlan1986induction}. O algoritmo ID3 é um dos únicos algoritmos que somente recebe dados discretos e sua fórmula de escolha dos atributos a serem testados nos \emph{nós decisão} é o Information Gain. 
+Neste projeto, será utilizado o algoritmo ID3 desenvolvido por Quinlan \cite{quinlan1986induction}. Esse método, pertencem à família de algoritmos \emph{Top Down Induction of Decision Trees} - TDIDT, ou seja, árvores que são construídas de cima para baixo. O algoritmo ID3 é um dos únicos algoritmos que somente recebe dados discretos e sua fórmula de escolha dos atributos a serem testados nos \emph{nós decisão} é o Information Gain. 
 
 ## Information Gain
 
