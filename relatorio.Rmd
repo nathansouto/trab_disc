@@ -576,11 +576,11 @@ Nao & 11           & 801          & 18          & 403
 # Acurácia --> 0.867
 ```
 
-
-
 # Conclusão
 
-Comentar os resultados (tendência para não desgaste)
+Com a construção da árvore de decisão na Figura \ref{fig:arvore} podemos notar que os \emph{nós folha} com a resposta "Sim" para o desgaste tem uma proporção de indivíduos agrupados menor do que a resposta "Não", como já era esperado, dado que o conjunto de dados possui mais funcionários que não relataram desgaste do que ao contrário, como podemos ver na Tabela \ref{tab:desgaste}.
+
+Além disso, pela árvore, podemos ver as possíveis causas de desgaste dos funcionários. Cada \emph{nó decisão} possui um atributo que obteve um Information Gain alto em comparação aos demais. Como explicado na Metodologia, o \emph{nó raiz} é o que possui o maior Information Gain que decai ao longo dos níveis da árvore. Portanto, as variáveis que melhor diminuem a entropia dos dados são HoraExtra, StatusRelacionamento, Anos Colaboracao e todas as demais que estão nos \emph{nós decisão} da árvore, ou seja, essas variáveis são as mais decisivas para o funcionário ter ou não desgaste.
 
 \clearpage
 \bibliographystyle{plain}
