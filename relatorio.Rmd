@@ -122,9 +122,9 @@ Na Figura \ref{fig:exemplo} temos um exemplo simples dessa metodologia para o di
 knitr::include_graphics("imagem_exemplo.png")
 ```
 
-Existem diferentes algoritmos de aplicação desse método com diferentes formúlas de escolher os testes nos nós decisão, tipo de variáveis utilizadas, velocidade de execução, entre outros fatores \cite{patel2014decisiontree}.
+Existem diferentes algoritmos de aplicação desse método com diferentes formas de escolher os testes nos nós decisão, tipo de variáveis utilizadas, velocidade de execução, entre outros fatores \cite{patel2014decisiontree}.
 
-Neste projeto, será utilizado o algoritmo ID3 desenvolvido por Quinlan \cite{quinlan1986induction}. Esse método, pertencem à família de algoritmos \emph{Top Down Induction of Decision Trees} - TDIDT, ou seja, árvores que são construídas de cima para baixo. O algoritmo ID3 é um dos únicos algoritmos que somente recebe dados discretos e sua fórmula de escolha dos atributos a serem testados nos \emph{nós decisão} é o Information Gain. 
+Neste projeto, será utilizado o algoritmo ID3 desenvolvido por Quinlan \cite{quinlan1986induction}. Esse método pertence à família de algoritmos \emph{Top Down Induction of Decision Trees} - TDIDT, ou seja, árvores que são construídas de cima para baixo. O algoritmo ID3 é um dos únicos algoritmos que somente recebe dados discretos e sua fórmula de escolha dos atributos a serem testados nos \emph{nós decisão} é o Information Gain. 
 
 ## Information Gain
 
@@ -132,9 +132,9 @@ O Information Gain ou Ganho de Informação é uma medida quantitativa dos atrib
 
 Sua fórmula é $$Gain(A) = I(p,n) - E(A)$$, onde $I(p,n)$ é a entropia de todo conjunto e $E(A)$ é o valor esperado da entropia do atributo A.
 
-A entropia caracteriza a impureza de uma coleção árbitrária de exemplos. Neste algoritmo ela consiste em calcular o número de bits esperados necessários para codificar uma classificação. Seu cálculo é $$I(p,n) = - \frac{p}{p+n}log_2\frac{p}{p+n} - \frac{n}{p+n}log_2\frac{n}{p+n}$$, onde $n$ é a quantidade de classificações negativas e $p$ é a quantidade de classificações positivas. A entropia pode ir de 0 a 1, sendo 1 a "maior impureza", ou seja, o maior trabalho para codificar uma classificação. \cite{quinlan1986induction}
+A entropia caracteriza a impureza de uma coleção árbitrária de exemplos. Neste algoritmo ela consiste em calcular o número de bits esperados necessários para codificar uma classificação. Como este estudo se atém a variáveis binárias, seu cálculo é $$I(p,n) = - \frac{p}{p+n}log_2\frac{p}{p+n} - \frac{n}{p+n}log_2\frac{n}{p+n}$$, onde $n$ é a quantidade de classificações negativas e $p$ é a quantidade de classificações positivas. A entropia pode ir de 0 a 1, sendo 1 a "maior impureza", obtida quando todas as observações pertencem a somente uma das categorias, e 0 a "menor impureza", quando os dados estão perfeitamente divididos. \cite{quinlan1986induction}
 
-Com isso, o valor esperado da entropia do atributo A têm a seguinte fórmula $$E(A) = \sum_{i=1}^v \frac{p_i + n_i}{p + n}I(p_i,n_i)$$, onde $v$ é a quantidade de categorias do atributo A, $n_i$ é a quantidade de classificações negativas na categoria $i$ e $p_i$ é a quantidade de classificações positivas na categoria $i$. \cite{quinlan1986induction}
+Com isso, o valor esperado da entropia do atributo A têm a seguinte fórmula $$E(A) = \sum_{i=1}^v \frac{p_i + n_i}{p + n}I(p_i,n_i)$$, em que $v$ é a quantidade de categorias do atributo A, $n_i$ é a quantidade de classificações negativas na categoria $i$ e $p_i$ é a quantidade de classificações positivas na categoria $i$. \cite{quinlan1986induction}
 
 Além de definir quais são os melhores atributos a serem incorporados na árvore de decisão, a medida Information Gain também é utilizada pelo algoritmo para ajustar da melhor forma todas as variáveis para serem categóricas binárias. Ele segue o procedimento:
 
