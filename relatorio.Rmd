@@ -286,7 +286,7 @@ Na tabela \ref{tab:desgaste}, tem-se a quantidade de resgistros para cada tipo d
 
 \begin{table}[H]
 \centering
-\caption{Hora Extra (a esquerda) X Desgaste (em cima).}\label{tab:desgaste}
+\caption{Informações da variável Desgaste}\label{tab:desgaste}
 \begin{tabular}{rrr}
   \hline
 Desgaste & Total & Frequência \\ 
@@ -301,26 +301,20 @@ Cerca de 16% dos funcionários da empresa, tem um desgaste com o serviço. E par
 
 Na tabela \ref{tab:desg_hrex}, encontra-se a relação entre a resposta de desgaste e a variável de horas extras através de uma tabela de contingência.
 
-```{r}
-#with(dados, table(HoraExtra, Desgaste)) %>%
-#  xtable::xtable()
-```
-
 \begin{table}[H]
 \centering
 \caption{Hora Extra (a esquerda) X Desgaste (em cima).}\label{tab:desg_hrex}
 \begin{tabular}{rrr}
   \hline
- & Nao & Sim \\ 
+ & Nãoo & Sim \\ 
   \hline
-Nao & 0.896 & 0.104 \\ 
+Não & 0.896 & 0.104 \\ 
   Sim & 0.695 & 0.305 \\ 
    \hline
 \end{tabular}
 \end{table}
 
-Percebe-se que os funcionários que fazem horas extras tem uma probabilidade maior de ter desgaste no serviço do que aqueles que não fazem o tempo a mais de serviço. O que faz sentido, dado que quanto mais tempo você passa no trabalho, mais você se desgasta.
-
+Percebe-se que os funcionários que fazem horas extras tem uma probabilidade maior de ter desgaste no serviço do que aqueles que não fazem o tempo a mais de serviço.
 
 Na tabela \ref{tab:desg_status}, encontra-se a relação entre a resposta de desgaste e a variável de status do relacionamento através de uma tabela de contingência.
 
@@ -332,7 +326,7 @@ Na tabela \ref{tab:desg_status}, encontra-se a relação entre a resposta de des
  & Não & Sim \\ 
   \hline
 Solteiro (a) & 0.745 & 0.255 \\ 
-  Outras & 0.883 & 0.117 \\ 
+  Outros & 0.883 & 0.117 \\ 
    \hline
 \end{tabular}
 \end{table}
@@ -346,7 +340,7 @@ Na tabela \ref{tab:desg_cargo}, encontra-se a relação entre a resposta de desg
 \caption{Cargo (a esquerda) X Desgaste (em cima).}\label{tab:desg_cargo}
 \begin{tabular}{rrr}
   \hline
- & Nao & Sim \\ 
+ & Não & Sim \\ 
   \hline
 pesquisador, tecnico de laboratorio e vendedor & 0.807 & 0.193 \\ 
 Demais cargos & 0.916 & 0.084 \\ 
@@ -364,7 +358,7 @@ Na tabela \ref{tab:desg_viaja}, encontra-se a relação entre a resposta de desg
 \caption{Viaja a trabalho (a esquerda) X Desgaste (em cima).}\label{tab:desg_viaja}
 \begin{tabular}{rrr}
   \hline
- & Nao & Sim \\ 
+ & Não & Sim \\ 
   \hline
 viaja frequentemente & 0.751 & 0.249 \\ 
 Outros & 0.859 & 0.141 \\ 
@@ -382,7 +376,7 @@ Na tabela \ref{tab:desg_satistrab}, encontra-se a relação entre a resposta de 
 \caption{Satisfação no trabalho (a esquerda) X Desgaste (em cima).}\label{tab:desg_satistrab}
 \begin{tabular}{rrr}
   \hline
- & Nao & Sim \\ 
+ & Não & Sim \\ 
   \hline
 Alto, baixo e médio & 0.817 & 0.183 \\ 
 Muito Alto & 0.887 & 0.113 \\ 
@@ -399,7 +393,7 @@ Na tabela \ref{tab:desg_depar}, encontra-se a relação entre a resposta de desg
 \caption{Departamento (a esquerda) X Desgaste (em cima).}\label{tab:desg_depar}
 \begin{tabular}{rrr}
   \hline
- & Nao & Sim \\ 
+ & Não & Sim \\ 
   \hline
 Vendas & 0.794 & 0.206 \\ 
 Outros departamentos & 0.858 & 0.142 \\ 
@@ -409,20 +403,116 @@ Outros departamentos & 0.858 & 0.142 \\
 
 Percebe-se que os funcionários que pertencem ao departamento de vendas tem uma probabilidade maior de ter desgaste no serviço do que aqueles que pertence ao RH ou ao departamento de pesquisa e desenvolvimento.
 
+Na tabela \ref{tab:desg_renda}, encontra-se a relação entre a resposta de desgaste e a variável de renda através de uma tabela de contingência.
+
+\begin{table}[H]
+\centering
+\caption{Renda (a esquerda) X Desgaste (em cima).}\label{tab:desg_renda}
+\begin{tabular}{rrr}
+  \hline
+ & Não & Sim \\ 
+  \hline
+'< 4056' & 0.752 & 0.248 \\ 
+'>= 4056' & 0.892 & 0.108 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Percebe-se que os funcionários que possuem uma renda inferior ao valor de 4.056 tem uma probabilidade maior de ter desgaste no serviço do que aqueles que possuem uma renda mensal superior ou igual a esse valor.
+
+Na tabela \ref{tab:desg_col}, encontra-se a relação entre a resposta de desgaste e a variável de anos de colaboração através de uma tabela de contingência.
+
+\begin{table}[H]
+\centering
+\caption{Anos de Colaboração (a esquerda) X Desgaste (em cima).}\label{tab:desg_col}
+\begin{tabular}{rrr}
+  \hline
+ & Não & Sim \\ 
+  \hline
+'< 3' & 0.561 & 0.439 \\ 
+'>= 3' & 0.864 & 0.136 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Percebe-se que os funcionários que trabalham na empresa há menos de 3 anos tem uma probabilidade maior de ter desgaste no serviço do que aqueles que colaboram com a empresa há mais tempo.
+
+Na tabela \ref{tab:desg_nivel}, encontra-se a relação entre a resposta de desgaste e a variável de nível na empresa.
+
+\begin{table}[H]
+\centering
+\caption{Nível na empresa (a esquerda) X Desgaste (em cima).}\label{tab:desg_nivel}
+\begin{tabular}{rrr}
+  \hline
+ & Não & Sim \\ 
+  \hline
+'< 2' & 0.737 & 0.263 \\ 
+'>= 2' & 0.889 & 0.101 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Tem-se que os funcionários que possuem um nível na empresa inferior a 2 tem uma probabilidade maior de ter desgaste no serviço do que aqueles que possuem um nivel igual ou superior a 2.
+
+Na tabela \ref{tab:desg_anos}, encontra-se a relação entre a resposta de desgaste e a variável de Anos na empresa.
+
+\begin{table}[H]
+\centering
+\caption{Anos na empresa (a esquerda) X Desgaste (em cima).}\label{tab:desg_anos}
+\begin{tabular}{rrr}
+  \hline
+ & Não & Sim \\ 
+  \hline
+'< 2' & 0.651 & 0.349 \\ 
+'>= 2' & 0.871 & 0.129 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Tem-se que os funcionários que possuem menos de 2 anos na empresa tem uma probabilidade maior de ter desgaste no serviço do que aqueles que possuem 2 ou mais anos na empresa.
+
+Na tabela \ref{tab:desg_nume}, encontra-se a relação entre a resposta de desgaste e a variável número de empresas trabalhadas pelos funcionários.
+
+\begin{table}[H]
+\centering
+\caption{Nº empresas trabalhadas (a esquerda) X Desgaste (em cima).}\label{tab:desg_nume}
+\begin{tabular}{rrr}
+  \hline
+ & Não & Sim \\ 
+  \hline
+'< 5' & 0.854 & 0.146 \\ 
+'>= 5' & 0.782 & 0.218 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Tem-se que os funcionários que trabalhou em 5 ou mais empresas tem uma probabilidade maior de ter desgaste no serviço do que aqueles que trabalhou em menos de 5 empresas.
+
+Na tabela \ref{tab:desg_empr}, encontra-se a relação entre a resposta de desgaste e a variável número de empregados.
+
+\begin{table}[H]
+\centering
+\caption{Nº empregados (a esquerda) X Desgaste (em cima).}\label{tab:desg_empr}
+\begin{tabular}{rrr}
+  \hline
+ & Não & Sim \\ 
+  \hline
+'< 919' & 0.847 & 0.153 \\ 
+'>= 919' & 0.832 & 0.168 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Tem-se que os funcionários que trabalham em uma empresa que possui mais de 918 funcionários tem uma probabilidade maior de ter desgaste no serviço do que aqueles que trabalham em uma empresa que tem menos funcionários.
 
 Olhando um pouco para uma variável sexo, na tabela \ref{tab:desg_sexo}, foi construída uma tabela de contingência entre ela e o desgaste.
 
-```{r}
-#with(dados, table(Sexo, Desgaste)) %>%
-#  xtable::xtable()
-```
-
-\begin{table}[ht]
+\begin{table}[H]
 \centering
 \caption{Sexo X Desgaste.}\label{tab:desg_sexo}
 \begin{tabular}{rrr}
   \hline
- & Nao & Sim \\ 
+ & Não & Sim \\ 
   \hline
 Feminino & 0.852 &  0.148 \\ 
   Masculino & 0.830 & 0.170 \\ 
