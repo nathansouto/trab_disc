@@ -109,7 +109,7 @@ Partindo da problemática de desgaste (atrito), o presente relatório tem como p
 
 ## Árvore de Decisão ID3
 
-As Árvores de Decisão são métodos práticos de aprendizagem indutiva para aproximação de funções de valores discretos \cite{koerich}. Uma árvore de decisão é uma estrutura de dados definida recursivamente como: \cite{quinlan1986induction, monard2003induccao}
+As Árvores de Decisão são métodos práticos de aprendizagem indutiva para aproximação de funções de valores discretos \cite{koerich}. Isto é, elas agrupam os dados com base em sequências de testes semelhantes a testes cognitivos (binários ou multinomiais) e chegam a um determinado agrupamento das informações com base nestas operações. Uma árvore de decisão é uma estrutura de dados definida recursivamente como: \cite{quinlan1986induction, monard2003induccao}
 
 \begin{enumerate}
   \item \emph{nó decisão} que contém um teste sobre algum atributo da instância. Para cada resultado do teste existe uma aresta para uma subárvore. Cada subárvore tem a mesma estrutura que a árvore
