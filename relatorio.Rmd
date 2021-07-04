@@ -276,6 +276,8 @@ colnames(dados) <- c("Idade", "Desgaste", "ViagemTrabalho",
                      "Acoes", "AnosColaboracao", "TreinamentoAnoPassado",
                      "EquilibrioVidaTrabalho", "AnosNaEmpresa", "AnosNaFuncao",
                      "AnosUltimaPromocao", "AnosMesmoGerente")
+
+dados$NivelTrabalho <- factor(dados$NivelTrabalho)
 ```
 
 Para entender e visualizar melhor os dados e as variáveis, serão apresentadas algumas tabelas através de uma análise descritiva.
