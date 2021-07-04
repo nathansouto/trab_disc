@@ -185,7 +185,9 @@ dados %>%
 
 Acho que pode ser uma tabela
 ```{r}
-with(dados, table(Desgaste, Sexo))
+t1 = with(dados, table(Sexo, Desgaste))
+prop.table(t1)
+
 
 with(dados, table(StatusRelacionamento, Desgaste))
 
@@ -267,5 +269,5 @@ predict(fit, newdata = test, type = "class") %>%
 ```
 
 ```{r}
-rpart.plot(fit, type=0, extra=101, box.palette="gray", branch.lty = 3, nn=TRUE, cex=1)
+rpart.plot(fit, type=0, extra=101, box.palette="gray", branch.lty = 3, nn=TRUE, cex=0.8)
 ```

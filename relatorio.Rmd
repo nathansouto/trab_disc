@@ -93,13 +93,51 @@ Abrir a discussão sobre o desgaste dos funcionários - O que é isso? O que ela
 
 "Sabendo da realidade do desgate de funcinários e seus problemas, foi (ou será) realizado uma análise e previsão ..."
 
-# Dados --> Natainá
+# Dados
 
 Descrição dos dados com as devidas análises explorátorias (analise geral por cima de todos, descrição dos dados e relação com o desgaste).
 Tabelas de contingência + gráficos
 
-O banco de dados conta com 35 variáveis e 1470 observações. As variáveis são relacionadas ao trabalho e algumas da vida pessoal dos funcionários. 
-As principais variáveis que foram mais performática para o modelo de árvore de decisão são:horaExtra (Se o funcionário costuma ou não fazer horas extras no trabalho), statusRelacionamento (qual é o status do relacionamento do indivíduo), anosColaboracao (o tempo de colaboração na vida), cargo, nivelTrabalho (nivel do plano  de carreira do funcionário), viagemTrabalho (frequência de viagens a trabalho), diaria, anosNaEmpresa (tempo que está na empresa), satisfacaoTrabalho, departamento, nEmpresasTrabalhadas (quantidade de empresas que trabalhou na vida), renda e numeroEmpregados.
+O banco de dados conta com 35 variáveis e 1470 observações. As variáveis são relacionadas ao trabalho e algumas relacionadas a vida pessoal dos funcionários. Os dados possue variáveis categóricas e numéricas.
+As principais variáveis que foram mais performáticas para o modelo de árvore de decisão são: HoraExtra (Se o funcionário costuma ou não fazer horas extras no trabalho), StatusRelacionamento (qual é o status do relacionamento do indivíduo), AnosColaboracao (o tempo de colaboração na vida), Cargo, NivelTrabalho (nivel do plano  de carreira do funcionário), ViagemTrabalho (frequência de viagens a trabalho), Diaria, AnosNaEmpresa (tempo que está na empresa), SatisfacaoTrabalho, Departamento, NumEmpresasTrabalhadas (quantidade de empresas que trabalhou na vida), Renda e NumeroEmpregados. A variável de decisão é a variável categórica Desgaste, toda a árvore é construída para tomar a decisão se um determinado funcionário (a partir do que se conhece das outras variáveis do modelo) está tendo um desgaste no trabalho, ou seja, a probabilidade dele tomar a decisão de querer sair da empresa.
+
+# Análise descritiva
+
+Para entender e visualizar melhor os dados e as variáveis, serão apresentados alguns gráficos e tabelas através de uma análise descritiva.
+
+Na figura 1, foi construído um gráfico da frequência relativa da resposta de desgaste por cargo. 
+
+```{r}
+dados %>%
+  group_by(Cargo, Desgaste) %>%
+  summarise(n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  ggplot(aes(x=Desgaste, fill=Cargo)) +
+  geom_bar(size=3, position="dodge", aes(y = freq), stat = 'identity') +
+  xlab("Desgaste") +                             
+  ylab("Frequência relativa") +                                  
+  ggtitle("Frequência relativa das respostas de desgaste por cargo")
+```
+
+Pode-se notar que o cargo que possui a maior frequência de resposta 'sim' é o técnico de laboratório, ou seja, quem tem esse cargo na empresa, tem uma probabilidade maior de ter um desgaste na empresa. E para o cargo de gerente, a probabilidade do funcionário ter um desgaste no trabalho é menor do que os demais cargos.
+
+Na tabela 1, encontra-se uma tabela de contingência da relação entre a resposta de desgaste e a variável de horas extras.
+
+```{r}
+with(dados, table(HoraExtra, Desgaste))
+```
+Percebe-se que os funcionários que fazem horas extras tem uma probabilidade maior de ter desgaste no serviço do que aqueles que não fazem o tempo a mais de serviço. O que faz sentido, dado que quanto mais tempo você passa no trabalho, mais você se desgasta.
+
+Olhando um pouco para uma variável sexo, foi construída uma tabela de contingência entre ela e o desgaste.
+
+```{r}
+with(dados, table(Sexo, Desgaste))
+```
+
+Calculando a porcentagem de resposta sim para cada um dos sexos, tem-se 17,4% e 20,5% para o sexo feminino e masculino respectivamente. Nota-se que não é uma diferença significativa, ou seja, a variável sexo não é uma variável significativa para decidir sobre o desgaste dos funcionários.
+
+
+
 
 # Metodologia --> Curi e Nate
 
