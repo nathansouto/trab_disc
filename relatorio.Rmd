@@ -152,6 +152,10 @@ Para evitar o super-ajuste, é realizada uma "poda" na árvore de decisão, defi
 
 Além disso, com os números de nós definidos, os atributos que se mantiveram na árvore, também são os atributos que melhor classificam às informações, ou seja, possuem o maior Information Gain.
 
+## Reamostragem Hold-Out
+
+Para o processo de teste do algoritmo, será utilizada o método de Reamostragem Hold-out. Que consiste em separar o conjunto de dados em um conjunto de treino e conjunto de teste aleatoriamente. O algoritmo irá agrupar $\frac{2}{3}$ das informações no conjunto de treino e $\frac{1}{3}$ das informações no conjunto de teste \cite{berrar2019cross}. Com isso, no final do ajuste da Árvore de Decisão ID3, será possível fazer uma última análise se o algoritmo se comporta bem aos dados. 
+
 # Dados
 
 Descrição dos dados com as devidas análises explorátorias (analise geral por cima de todos, descrição dos dados e relação com o desgaste).
