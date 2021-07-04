@@ -69,7 +69,8 @@ options(
 \end{titlepage}
 
 \begin{abstract}
-Resumo Resumo Resumo
+
+Principal artigo da metodologia --> \cite{quinlan1986induction}
 
 \end{abstract}
 
@@ -109,6 +110,34 @@ As principais variáveis que foram mais performática para o modelo de árvore d
   - Information Gain
 
 - Validação utilizada --> hold-out
+
+## Árvore de Decisão ID3
+
+As Árvores de Decisão são métodos práticos de aprendizagem indutiva para aproximação de funções de valores discretos \cite{koerich}. Algoritmos que utilizam esse método, pertencem à família de algoritmos \emph{Top Down Induction of Decision Trees} - TDIDT, ou seja, árvores que são construídas de cima para baixo. Uma árvore de decisão é uma estrutura de dados definida recursivamente como: \cite{quinlan1986induction, monard2003induccao}
+
+\begin{enumerate}
+  \item um \emph{nó decisão} que contém um teste sobre algum atributo da instância. Para cada resultado do teste existe uma aresta para uma subárvore. Cada subárvore tem a mesma estrutura que a árvore ou
+  \item um \emph{nó folha} que corresponde a uma classificação final
+  
+Na Figura \ref{fig:exemplo} temos um exemplo simples dessa metodologia para o diagnóstico de um paciente. Nela podemos ver os nós citados acima. Os nós em formato redondo são os \emph{nós decisão} e os de formato retangular são os \emph{nós folha}. O primeiro nó da árvore é também chamado de \emph{nó raiz}. \cite{monard2003induccao}
+  
+```{r pressure, echo=FALSE, fig.cap="Uma árvore de decisão simples para o diagnótico de um paciente.\\label{fig:exemplo}", out.width = '50%'}
+knitr::include_graphics("imagem_exemplo.png")
+```
+
+Existem diferentes algoritmos de aplicação desse método com diferentes formúlas de escolher os testes nos nós decisão, tipo de variáveis utilizadas, velocidade de execução, entre outros fatores \cite{patel2014decisiontree}.
+
+Neste projeto, será utilizado o algoritmo ID3 desenvolvido por Quinlan \cite{quinlan1986induction}. O algoritmo ID3 é um dos únicos algoritmos que somente recebe dados discretos e sua fórmula de escolha dos atributos a serem testados nos \emph{nós decisão} é o Information Gain. 
+
+## Information Gain
+
+O Information Gain ou Ganho de Informação é uma medida quantitativa dos atributos que mede o quão bem ele separa os exemplos de treinamento de acordo com a classificação alvo. Ele consiste em calcular a redução esperada na entropia causada pela partição dos exemplos de acordo com o atributo. 
+
+Sua fórmula é $$Gain(A) = I(p,n) - E(A)$$, onde $I(p,n)$ é a entropia de todo conjunto e $E(A)$ é o valor esperado da entropia do atributo A.
+
+A entropia caracteriza a impureza de uma coleção árbitrária de exemplos. Neste algoritmo ela consiste em calcular o número de bits esperados necessários para codificar uma classificação. Seu cálculo é $$I(p,n) = - \frac{p}{p+n}log_2\frac{p}{p+n} - \frac{n}{p+n}log_2\frac{n}{p+n}$$, onde $n$ é a classificação negativa e $p$ é a classificação positiva da medida de classificação. A entropia pode ir de 0 a 1, sendo 1 a "maior impureza", ou seja, a maior dificuldade de codificar uma classificação.
+
+Com isso, a $E(A)$ têm a seguinte fórmula $$E(A) = \sum_{i=1}^v \frac{p_i + n_i}{p + n}I(p_i,n_i)$$.
 
 # Aplicação --> Curi e Nate
 
