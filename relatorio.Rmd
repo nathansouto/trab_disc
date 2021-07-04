@@ -93,6 +93,61 @@ Abrir a discussão sobre o desgaste dos funcionários - O que é isso? O que ela
 
 "Sabendo da realidade do desgate de funcinários e seus problemas, foi (ou será) realizado uma análise e previsão ..."
 
+# Metodologia
+
+--> Parte mais importante segundo a hildete
+
+- Arvore de Decisao ID3 (explicar cada detalhe)
+  - Entropia
+  - Information Gain
+
+- Validação utilizada --> hold-out
+
+## Árvore de Decisão ID3
+
+As Árvores de Decisão são métodos práticos de aprendizagem indutiva para aproximação de funções de valores discretos \cite{koerich}. Algoritmos que utilizam esse método, pertencem à família de algoritmos \emph{Top Down Induction of Decision Trees} - TDIDT, ou seja, árvores que são construídas de cima para baixo. Uma árvore de decisão é uma estrutura de dados definida recursivamente como: \cite{quinlan1986induction, monard2003induccao}
+
+\begin{enumerate}
+  \item um \emph{nó decisão} que contém um teste sobre algum atributo da instância. Para cada resultado do teste existe uma aresta para uma subárvore. Cada subárvore tem a mesma estrutura que a árvore
+  \item um \emph{nó folha} que corresponde a uma classificação final
+\end{enumerate}
+  
+Na Figura \ref{fig:exemplo} temos um exemplo simples dessa metodologia para o diagnóstico de um paciente. Nela podemos ver os nós citados acima. Os nós em formato redondo são os \emph{nós decisão} e os de formato retangular são os \emph{nós folha}. O primeiro nó da árvore é também chamado de \emph{nó raiz}. \cite{monard2003induccao}
+  
+```{r pressure, echo=FALSE, fig.cap="Uma árvore de decisão simples para o diagnótico de um paciente.\\label{fig:exemplo}",out.width = '70%'}
+knitr::include_graphics("imagem_exemplo.png")
+```
+
+Existem diferentes algoritmos de aplicação desse método com diferentes formúlas de escolher os testes nos nós decisão, tipo de variáveis utilizadas, velocidade de execução, entre outros fatores \cite{patel2014decisiontree}.
+
+Neste projeto, será utilizado o algoritmo ID3 desenvolvido por Quinlan \cite{quinlan1986induction}. O algoritmo ID3 é um dos únicos algoritmos que somente recebe dados discretos e sua fórmula de escolha dos atributos a serem testados nos \emph{nós decisão} é o Information Gain. 
+
+## Information Gain
+
+O Information Gain ou Ganho de Informação é uma medida quantitativa dos atributos que mede o quão bem ele separa os exemplos de treinamento de acordo com a classificação alvo. Ele consiste em calcular a redução esperada na entropia causada pela partição dos exemplos de acordo com o atributo. \cite{koerich}
+
+Sua fórmula é $$Gain(A) = I(p,n) - E(A)$$, onde $I(p,n)$ é a entropia de todo conjunto e $E(A)$ é o valor esperado da entropia do atributo A.
+
+A entropia caracteriza a impureza de uma coleção árbitrária de exemplos. Neste algoritmo ela consiste em calcular o número de bits esperados necessários para codificar uma classificação. Seu cálculo é $$I(p,n) = - \frac{p}{p+n}log_2\frac{p}{p+n} - \frac{n}{p+n}log_2\frac{n}{p+n}$$, onde $n$ é a quantidade de classificações negativas e $p$ é a quantidade de classificações positivas. A entropia pode ir de 0 a 1, sendo 1 a "maior impureza", ou seja, o maior trabalho para codificar uma classificação. \cite{quinlan1986induction}
+
+Com isso, o valor esperado da entropia do atributo A têm a seguinte fórmula $$E(A) = \sum_{i=1}^v \frac{p_i + n_i}{p + n}I(p_i,n_i)$$, onde $v$ é a quantidade de categorias do atributo A, $n_i$ é a quantidade de classificações negativas na categoria $i$ e $p_i$ é a quantidade de classificações positivas na categoria $i$. \cite{quinlan1986induction}
+
+Além de definir quais são os melhores atributos a serem incorporados na árvore de decisão, a medida Information Gain também é utilizada pelo algoritmo para ajustar da melhor forma todas as variáveis para serem categóricas binárias. Ele segue o procedimento:
+
+\begin{enumerate}
+  \item caso a varíavel seja categórica binária, ou númerica binária, o algoritmo mantém o formato da variável
+  \item caso a variável seja categória com 3 ou mais categorias, o algoritmo seleciona a melhor divisão das categorias em 2 subgrupos e a torna em uma variável categórica binária. Essa seleção dos subgrupos é feita escolhendo o melhor Information Gain de todas as possíveis divisões \cite{koerich}
+  \item caso a variável seja númerica, o algoritmo seleciona o melhor valor $c$, que pertence ao intervalo da variável, para separa-lá em 2 intervalos, onde um será o intervalo positivo e o outro será o negativo. Por exemplo: Caso $Salário <= 1000$ então positivo, se $Salário > 1000$ então negativo. Esse separação também é feita escolhendo o melhor Information Gain de todos os possíveis valores $c$ pertecentes ao intervalo \cite{koerich}
+\end{enumerate}
+
+## Número de Nós
+
+Com os critérios definidos do funcionamento da árvore de decisão ID3, é possível criar uma árvore utilizando todas as variáveis dispóniveis como atributos nos \emph{nós decisão}. Porém, isso pode acabar super-ajustando os dados, fazendo com que o algoritmo funcione muito bem somente para o conjunto de treinamento de dados. 
+
+Para evitar o super-ajuste, é realizada uma "poda" na árvore de decisão, definindo um número ótimo de nós e seus atributos. Para essa escolha, dentro do conjunto de treino, o algoritmo o separa em dois grupos: "treino" e "poda". A árvore é então criada a partir do grupo "treino" e é validada pelo grupo "poda". Essa poda é feita na quantidade de nós em que o erro de classificação começa a divergir entre o grupo "treino" e o gruopo "poda". Pode ser que não seja o menor erro dentro do conjunto de treino, mas assim não há o super-ajuste dos dados. \cite{monard2003induccao}.
+
+Além disso, com os números de nós definidos, os atributos que se mantiveram na árvore, também são os atributos que melhor classificam às informações, ou seja, possuem o maior Information Gain.
+
 # Dados
 
 Descrição dos dados com as devidas análises explorátorias (analise geral por cima de todos, descrição dos dados e relação com o desgaste).
@@ -221,7 +276,7 @@ Na tabela \ref{tab:desg_hrex}, encontra-se uma tabela de contingência da relaç
 
 \begin{table}[ht]
 \centering
-\caption{Desgaste X Hora Extra.}\label{tab:desg_hrex}
+\caption{Hora Extra (a esquerda) X Desgaste (em cima).}\label{tab:desg_hrex}
 \begin{tabular}{rrr}
   \hline
  & Nao & Sim \\ 
@@ -243,7 +298,7 @@ Olhando um pouco para uma variável sexo, na tabela \ref{tab:desg_sexo}, foi con
 
 \begin{table}[ht]
 \centering
-\caption{Desgaste X Sexo.}\label{tab:desg_sexo}
+\caption{Sexo X Desgaste.}\label{tab:desg_sexo}
 \begin{tabular}{rrr}
   \hline
  & Nao & Sim \\ 
@@ -259,62 +314,8 @@ Calculando a porcentagem de resposta sim para cada um dos sexos, tem-se 17,4% e 
 
 
 
-# Metodologia --> Curi e Nate
 
---> Parte mais importante segundo a hildete
-
-- Arvore de Decisao ID3 (explicar cada detalhe)
-  - Entropia
-  - Information Gain
-
-- Validação utilizada --> hold-out
-
-## Árvore de Decisão ID3
-
-As Árvores de Decisão são métodos práticos de aprendizagem indutiva para aproximação de funções de valores discretos \cite{koerich}. Algoritmos que utilizam esse método, pertencem à família de algoritmos \emph{Top Down Induction of Decision Trees} - TDIDT, ou seja, árvores que são construídas de cima para baixo. Uma árvore de decisão é uma estrutura de dados definida recursivamente como: \cite{quinlan1986induction, monard2003induccao}
-
-\begin{enumerate}
-  \item um \emph{nó decisão} que contém um teste sobre algum atributo da instância. Para cada resultado do teste existe uma aresta para uma subárvore. Cada subárvore tem a mesma estrutura que a árvore
-  \item um \emph{nó folha} que corresponde a uma classificação final
-\end{enumerate}
-  
-Na Figura \ref{fig:exemplo} temos um exemplo simples dessa metodologia para o diagnóstico de um paciente. Nela podemos ver os nós citados acima. Os nós em formato redondo são os \emph{nós decisão} e os de formato retangular são os \emph{nós folha}. O primeiro nó da árvore é também chamado de \emph{nó raiz}. \cite{monard2003induccao}
-  
-```{r pressure, echo=FALSE, fig.cap="Uma árvore de decisão simples para o diagnótico de um paciente.\\label{fig:exemplo}",out.width = '70%'}
-knitr::include_graphics("imagem_exemplo.png")
-```
-
-Existem diferentes algoritmos de aplicação desse método com diferentes formúlas de escolher os testes nos nós decisão, tipo de variáveis utilizadas, velocidade de execução, entre outros fatores \cite{patel2014decisiontree}.
-
-Neste projeto, será utilizado o algoritmo ID3 desenvolvido por Quinlan \cite{quinlan1986induction}. O algoritmo ID3 é um dos únicos algoritmos que somente recebe dados discretos e sua fórmula de escolha dos atributos a serem testados nos \emph{nós decisão} é o Information Gain. 
-
-## Information Gain
-
-O Information Gain ou Ganho de Informação é uma medida quantitativa dos atributos que mede o quão bem ele separa os exemplos de treinamento de acordo com a classificação alvo. Ele consiste em calcular a redução esperada na entropia causada pela partição dos exemplos de acordo com o atributo. \cite{koerich}
-
-Sua fórmula é $$Gain(A) = I(p,n) - E(A)$$, onde $I(p,n)$ é a entropia de todo conjunto e $E(A)$ é o valor esperado da entropia do atributo A.
-
-A entropia caracteriza a impureza de uma coleção árbitrária de exemplos. Neste algoritmo ela consiste em calcular o número de bits esperados necessários para codificar uma classificação. Seu cálculo é $$I(p,n) = - \frac{p}{p+n}log_2\frac{p}{p+n} - \frac{n}{p+n}log_2\frac{n}{p+n}$$, onde $n$ é a quantidade de classificações negativas e $p$ é a quantidade de classificações positivas. A entropia pode ir de 0 a 1, sendo 1 a "maior impureza", ou seja, o maior trabalho para codificar uma classificação. \cite{quinlan1986induction}
-
-Com isso, o valor esperado da entropia do atributo A têm a seguinte fórmula $$E(A) = \sum_{i=1}^v \frac{p_i + n_i}{p + n}I(p_i,n_i)$$, onde $v$ é a quantidade de categorias do atributo A, $n_i$ é a quantidade de classificações negativas na categoria $i$ e $p_i$ é a quantidade de classificações positivas na categoria $i$. \cite{quinlan1986induction}
-
-Além de definir quais são os melhores atributos a serem incorporados na árvore de decisão, a medida Information Gain também é utilizada pelo algoritmo para ajustar da melhor forma todas as variáveis para serem categóricas binárias. Ele segue o procedimento:
-
-\begin{enumerate}
-  \item caso a varíavel seja categórica binária, ou númerica binária, o algoritmo mantém o formato da variável
-  \item caso a variável seja categória com 3 ou mais categorias, o algoritmo seleciona a melhor divisão das categorias em 2 subgrupos e a torna em uma variável categórica binária. Essa seleção dos subgrupos é feita escolhendo o melhor Information Gain de todas as possíveis divisões \cite{koerich}
-  \item caso a variável seja númerica, o algoritmo seleciona o melhor valor $c$, que pertence ao intervalo da variável, para separa-lá em 2 intervalos, onde um será o intervalo positivo e o outro será o negativo. Por exemplo: Caso $Salário <= 1000$ então positivo, se $Salário > 1000$ então negativo. Esse separação também é feita escolhendo o melhor Information Gain de todos os possíveis valores $c$ pertecentes ao intervalo \cite{koerich}
-\end{enumerate}
-
-## Número de Nós
-
-Com os critérios definidos do funcionamento da árvore de decisão ID3, é possível criar uma árvore utilizando todas as variáveis dispóniveis como atributos nos \emph{nós decisão}. Porém, isso pode acabar super-ajustando os dados, fazendo com que o algoritmo funcione muito bem somente para o conjunto de treinamento de dados. 
-
-Para evitar o super-ajuste, é realizada uma "poda" na árvore de decisão, definindo um número ótimo de nós e seus atributos. Para essa escolha, dentro do conjunto de treino, o algoritmo o separa em dois grupos: "treino" e "poda". A árvore é então criada a partir do grupo "treino" e é validada pelo grupo "poda". Essa poda é feita na quantidade de nós em que o erro de classificação começa a divergir entre o grupo "treino" e o gruopo "poda". Pode ser que não seja o menor erro dentro do conjunto de treino, mas assim não há o super-ajuste dos dados. \cite{monard2003induccao}.
-
-Além disso, com os números de nós definidos, os atributos que se mantiveram na árvore, também são os atributos que melhor classificam às informações, ou seja, possuem o maior Information Gain.
-
-# Aplicação --> Curi e Nate
+# Aplicação
 
 Mostrar os resultados da aplicação do modelo
 
