@@ -93,6 +93,7 @@ Abrir a discussão sobre o desgaste dos funcionários - O que é isso? O que ela
 
 "Sabendo da realidade do desgate de funcinários e seus problemas, foi (ou será) realizado uma análise e previsão ..."
 
+<<<<<<< HEAD
 # Dados
 
 Descrição dos dados com as devidas análises explorátorias (analise geral por cima de todos, descrição dos dados e relação com o desgaste).
@@ -140,6 +141,9 @@ O mesmo ocorre com outras variáveis como
 
 
 # Metodologia --> Curi e Nate
+=======
+# Metodologia
+>>>>>>> 47fea6c1bcbfa500c5703cb5b37eff9e3e649aa9
 
 --> Parte mais importante segundo a hildete
 
@@ -194,7 +198,174 @@ Para evitar o super-ajuste, é realizada uma "poda" na árvore de decisão, defi
 
 Além disso, com os números de nós definidos, os atributos que se mantiveram na árvore, também são os atributos que melhor classificam às informações, ou seja, possuem o maior Information Gain.
 
-# Aplicação --> Curi e Nate
+# Dados
+
+Descrição dos dados com as devidas análises explorátorias (analise geral por cima de todos, descrição dos dados e relação com o desgaste).
+Tabelas de contingência + gráficos
+
+O banco de dados conta com 35 variáveis e 1470 observações. As variáveis são relacionadas ao trabalho e algumas relacionadas a vida pessoal dos funcionários. Os dados possue variáveis categóricas e numéricas.
+As principais variáveis que foram mais performáticas para o modelo de árvore de decisão são: HoraExtra (Se o funcionário costuma ou não fazer horas extras no trabalho), StatusRelacionamento (qual é o status do relacionamento do indivíduo), AnosColaboracao (o tempo de colaboração na vida), Cargo, NivelTrabalho (nivel do plano  de carreira do funcionário), ViagemTrabalho (frequência de viagens a trabalho), Diaria, AnosNaEmpresa (tempo que está na empresa), SatisfacaoTrabalho, Departamento, NumEmpresasTrabalhadas (quantidade de empresas que trabalhou na vida), Renda e NumeroEmpregados. A variável de decisão é a variável categórica Desgaste, toda a árvore é construída para tomar a decisão se um determinado funcionário (a partir do que se conhece das outras variáveis do modelo) está tendo um desgaste no trabalho, ou seja, a probabilidade dele tomar a decisão de querer sair da empresa.
+
+# Análise descritiva
+
+```{r}
+library(tidyverse)
+library(kableExtra)
+library(caret)
+require(rpart)
+require(rpart.plot)
+dados <- read_csv("WA_Fn-UseC_-HR-Employee-Attrition.csv")
+
+dados = dados %>%
+  select(-c(EmployeeCount, Over18, StandardHours))
+dados$Attrition[dados$Attrition == 'Yes'] <- "Sim"
+dados$Attrition[dados$Attrition == 'No'] <- "Nao"
+
+dados$BusinessTravel[dados$BusinessTravel == 'Non-Travel'] <- "Nao Viaja"
+dados$BusinessTravel[dados$BusinessTravel == 'Travel_Rarely'] <- "Viaja Raramente"
+dados$BusinessTravel[dados$BusinessTravel == 'Travel_Frequently'] <- "Viaja Frequentemente"
+
+dados$Department[dados$Department == 'Research & Development'] <- "Pesquisa e desenvolvimento"  
+dados$Department[dados$Department == 'Sales'] <- "Vendas"  
+dados$Department[dados$Department == 'Human Resources'] <- "RH"  
+
+dados$EducationField[dados$EducationField == 'Human Resources'] <- "RH" 
+dados$EducationField[dados$EducationField == 'Life Sciences'] <- "Ciencias" 
+dados$EducationField[dados$EducationField == 'Marketing'] <- "Marketing" 
+dados$EducationField[dados$EducationField == 'Technical Degree'] <- "Grau Tecnico" 
+dados$EducationField[dados$EducationField == 'Medical'] <- "Medicina" 
+dados$EducationField[dados$EducationField == 'Other'] <- "Outros"
+
+dados$Gender[dados$Gender == 'Male'] <- "Masculino"  
+dados$Gender[dados$Gender == 'Female'] <- "Feminino"  
+
+dados$JobRole[dados$JobRole == 'Healthcare Representative'] <- "Assistente Medico" 
+dados$JobRole[dados$JobRole == 'Laboratory Technician'] <- "Tecnico de Laboratorio" 
+dados$JobRole[dados$JobRole == 'Human Resources'] <- "RH" 
+dados$JobRole[dados$JobRole == 'Manager'] <- "Gerente" 
+dados$JobRole[dados$JobRole == 'Manufacturing Director'] <- "Manufatura" 
+dados$JobRole[dados$JobRole == 'Research Director'] <- "Pesquisador" 
+dados$JobRole[dados$JobRole == 'Research Scientist'] <- "Pesquisador" 
+dados$JobRole[dados$JobRole == 'Sales Executive'] <- "Vendedor" 
+dados$JobRole[dados$JobRole == 'Sales Representative'] <- "Vendedor"
+
+dados$MaritalStatus[dados$MaritalStatus == 'Single'] <- "Solteiro(a)"  
+dados$MaritalStatus[dados$MaritalStatus == 'Married'] <- "Casado(a)"  
+dados$MaritalStatus[dados$MaritalStatus == 'Divorced'] <- "Divorciado(a)"  
+
+dados$OverTime[dados$OverTime == 'Yes'] <- "Sim"  
+dados$OverTime[dados$OverTime == 'No'] <- "Nao"  
+
+dados$Education[dados$Education == 1] <- "< Medio"
+dados$Education[dados$Education == 2] <- "Superior"
+dados$Education[dados$Education == 3] <- "Bacharel"
+dados$Education[dados$Education == 4] <- "Mestrado"
+dados$Education[dados$Education == 5] <- "Doutorado"
+
+dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 1] <- "Baixo"
+dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 2] <- "Medio"
+dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 3] <- "Alto"
+dados$EnvironmentSatisfaction[dados$EnvironmentSatisfaction == 4] <- "Muito Alto"
+
+dados$JobInvolvement[dados$JobInvolvement == 1] <- "Baixo"
+dados$JobInvolvement[dados$JobInvolvement == 2] <- "Medio"
+dados$JobInvolvement[dados$JobInvolvement == 3] <- "Alto"
+dados$JobInvolvement[dados$JobInvolvement == 4] <- "Muito Alto"
+
+dados$JobSatisfaction[dados$JobSatisfaction == 1] <- "Baixo"
+dados$JobSatisfaction[dados$JobSatisfaction == 2] <- "Medio"
+dados$JobSatisfaction[dados$JobSatisfaction == 3] <- "Alto"
+dados$JobSatisfaction[dados$JobSatisfaction == 4] <- "Muito Alto"
+
+dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 1] <- "Baixo"
+dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 2] <- "Medio"
+dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 3] <- "Alto"
+dados$RelationshipSatisfaction[dados$RelationshipSatisfaction == 4] <- "Muito Alto"
+
+dados$PerformanceRating[dados$PerformanceRating == 1] <- "Baixo"
+dados$PerformanceRating[dados$PerformanceRating == 2] <- "Medio"
+dados$PerformanceRating[dados$PerformanceRating == 3] <- "Alto"
+dados$PerformanceRating[dados$PerformanceRating == 4] <- "Muito Alto"
+
+colnames(dados) <- c("Idade", "Desgaste", "ViagemTrabalho", 
+                     "Diaria", "Departamento", "DistanciaCasa",
+                     "Educacao", "AreaEducacao", "NumeroEmpregados",
+                     "SatisfacaoAmbiental", "Sexo", "TaxaHoraria", 
+                     "EnvolvimentoTrabalho", "NivelTrabalho", "Cargo",
+                     "SatisfacaoTrabalho", "StatusRelacionamento", "Renda",
+                     "TaxaMensal", "NumEmpresasTrabalhadas", "HoraExtra", 
+                     "AumentoSalarial", "Desempenho", "SatisfacaoRelacionamento",
+                     "Acoes", "AnosColaboracao", "TreinamentoAnoPassado",
+                     "EquilibrioVidaTrabalho", "AnosNaEmpresa", "AnosNaFuncao",
+                     "AnosUltimaPromocao", "AnosMesmoGerente")
+```
+
+Para entender e visualizar melhor os dados e as variáveis, serão apresentados alguns gráficos e tabelas através de uma análise descritiva.
+
+Na Figura \ref{fig:freq_cargo}, foi construído um gráfico da frequência relativa da resposta de desgaste por cargo. 
+
+```{r, fig.cap="Frequência relativa das respostas de desgaste por cargo.\\label{fig:freq_cargo}", fig.pos="H"}
+dados %>%
+  group_by(Cargo, Desgaste) %>%
+  summarise(n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  ggplot(aes(x=Desgaste, fill=Cargo)) +
+  geom_bar(size=3, position="dodge", aes(y = freq), stat = 'identity') +
+  xlab("Desgaste") +                             
+  ylab("Frequência relativa") 
+```
+
+Pode-se notar que o cargo que possui a maior frequência de resposta 'sim' é o técnico de laboratório, ou seja, quem tem esse cargo na empresa, tem uma probabilidade maior de ter um desgaste na empresa. E para o cargo de gerente, a probabilidade do funcionário ter um desgaste no trabalho é menor do que os demais cargos.
+
+Na tabela \ref{tab:desg_hrex}, encontra-se uma tabela de contingência da relação entre a resposta de desgaste e a variável de horas extras.
+
+```{r}
+#with(dados, table(HoraExtra, Desgaste)) %>%
+#  xtable::xtable()
+```
+
+\begin{table}[ht]
+\centering
+\caption{Hora Extra (a esquerda) X Desgaste (em cima).}\label{tab:desg_hrex}
+\begin{tabular}{rrr}
+  \hline
+ & Nao & Sim \\ 
+  \hline
+Nao & 944 & 110 \\ 
+  Sim & 289 & 127 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Percebe-se que os funcionários que fazem horas extras tem uma probabilidade maior de ter desgaste no serviço do que aqueles que não fazem o tempo a mais de serviço. O que faz sentido, dado que quanto mais tempo você passa no trabalho, mais você se desgasta.
+
+Olhando um pouco para uma variável sexo, na tabela \ref{tab:desg_sexo}, foi construída uma tabela de contingência entre ela e o desgaste.
+
+```{r}
+#with(dados, table(Sexo, Desgaste)) %>%
+#  xtable::xtable()
+```
+
+\begin{table}[ht]
+\centering
+\caption{Sexo X Desgaste.}\label{tab:desg_sexo}
+\begin{tabular}{rrr}
+  \hline
+ & Nao & Sim \\ 
+  \hline
+Feminino & 501 &  87 \\ 
+  Masculino & 732 & 150 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Calculando a porcentagem de resposta sim para cada um dos sexos, tem-se 17,4% e 20,5% para o sexo feminino e masculino respectivamente. Nota-se que não é uma diferença significativa, ou seja, a variável sexo não é uma variável significativa para decidir sobre o desgaste dos funcionários.
+
+
+
+
+
+# Aplicação
 
 Mostrar os resultados da aplicação do modelo
 
