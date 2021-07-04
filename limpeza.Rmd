@@ -198,6 +198,10 @@ prop.table(t)
 ```
 
 ```{r}
+with(dados, table(StatusRelacionamento, Desgaste))
+```
+
+```{r}
 dados %>%
   group_by(Cargo, Desgaste) %>%
   summarise(n = n()) %>%

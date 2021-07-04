@@ -136,7 +136,7 @@ with(dados, table(Sexo, Desgaste))
 
 Calculando a porcentagem de resposta sim para cada um dos sexos, tem-se 17,4% e 20,5% para o sexo feminino e masculino respectivamente. Nota-se que não é uma diferença significativa, ou seja, a variável sexo não é uma variável significativa para decidir sobre o desgaste dos funcionários.
 
-
+O mesmo ocorre com outras variáveis como 
 
 
 # Metodologia --> Curi e Nate
