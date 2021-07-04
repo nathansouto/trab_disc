@@ -118,10 +118,11 @@ As Árvores de Decisão são métodos práticos de aprendizagem indutiva para ap
 \begin{enumerate}
   \item um \emph{nó decisão} que contém um teste sobre algum atributo da instância. Para cada resultado do teste existe uma aresta para uma subárvore. Cada subárvore tem a mesma estrutura que a árvore ou
   \item um \emph{nó folha} que corresponde a uma classificação final
+\end{enumerate}
   
 Na Figura \ref{fig:exemplo} temos um exemplo simples dessa metodologia para o diagnóstico de um paciente. Nela podemos ver os nós citados acima. Os nós em formato redondo são os \emph{nós decisão} e os de formato retangular são os \emph{nós folha}. O primeiro nó da árvore é também chamado de \emph{nó raiz}. \cite{monard2003induccao}
   
-```{r pressure, echo=FALSE, fig.cap="Uma árvore de decisão simples para o diagnótico de um paciente.\\label{fig:exemplo}", out.width = '50%'}
+```{r pressure, echo=FALSE, fig.cap="Uma árvore de decisão simples para o diagnótico de um paciente.\\label{fig:exemplo}",out.width = '70%'}
 knitr::include_graphics("imagem_exemplo.png")
 ```
 
