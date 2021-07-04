@@ -17,10 +17,10 @@ header-includes:
 - \usepackage{caption}
 - \usepackage{float}
 output:
-  pdf_document:
-    fig_crop: no
   html_document:
     df_print: paged
+  pdf_document:
+    fig_crop: no
   link_citations: true
 ---
 
