@@ -153,8 +153,28 @@ Além disso, com os números de nós definidos, os atributos que se mantiveram n
 Descrição dos dados com as devidas análises explorátorias (analise geral por cima de todos, descrição dos dados e relação com o desgaste).
 Tabelas de contingência + gráficos
 
-O banco de dados conta com 35 variáveis e 1470 observações. As variáveis são relacionadas ao trabalho e algumas relacionadas a vida pessoal dos funcionários. Os dados possue variáveis categóricas e numéricas.
-As principais variáveis que foram mais performáticas para o modelo de árvore de decisão são: HoraExtra (Se o funcionário costuma ou não fazer horas extras no trabalho), StatusRelacionamento (qual é o status do relacionamento do indivíduo), AnosColaboracao (o tempo de colaboração na vida), Cargo, NivelTrabalho (nivel do plano  de carreira do funcionário), ViagemTrabalho (frequência de viagens a trabalho), Diaria, AnosNaEmpresa (tempo que está na empresa), SatisfacaoTrabalho, Departamento, NumEmpresasTrabalhadas (quantidade de empresas que trabalhou na vida), Renda e NumeroEmpregados. A variável de decisão é a variável categórica Desgaste, toda a árvore é construída para tomar a decisão se um determinado funcionário (a partir do que se conhece das outras variáveis do modelo) está tendo um desgaste no trabalho, ou seja, a probabilidade dele tomar a decisão de querer sair da empresa.
+O banco de dados conta com 35 variáveis e 1470 observações. As variáveis são relacionadas ao trabalho e algumas relacionadas a vida pessoal dos funcionários. Os dados possuem variáveis categóricas e numéricas.
+As principais variáveis que foram mais performáticas para o modelo de árvore de decisão, ou seja, obtiveram um maior Information Gain, estão descritas na Tabela \ref{tab:desc_dados}.
+
+\begin{table}[H]
+\caption{Variáveis e suas descrições.}\label{tab:desc_dados}
+\begin{tabular}{l|l}
+\textbf{Variável (Atributo)} & \textbf{Descrição}                                              \\ \hline
+HoraExtra                    & Se o funcionário costuma ou não fazer horas extras no trabalho. \\
+StatusRelacionamento         & Status do relacionamento do funcionário                         \\
+AnosColaboracao              & Quantidade de anos de colaboração                               \\
+Cargo                        & Cargo na empresa                                                \\
+NivelTrabalho                & Nivél do plano de carreira atual                                \\
+ViagemTrabalho               & Frequência de viagens a trabalho                                \\
+AnosNaEmpresa                & Quantidade de anos na empresa                                   \\
+Diaria                       & Salário bruto diário                                            \\
+SatisfacaoTrabalho           & Satisfação do funcionário com o trabalho                        \\
+Departamento                 & Departamento do funcionário                                     \\
+NumEmpresasTrabalhadas       & Quantidade de empresas em que o funcionário já trabalhou        \\
+Renda                        & Renda Familiar                                                  \\
+NumeroEmpregados             & Número de empregados da empresa                                
+\end{tabular}
+\end{table}
 
 # Análise descritiva
 
