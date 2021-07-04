@@ -21,6 +21,7 @@ output:
     fig_crop: no
   html_document:
     df_print: paged
+  link_citations: true
 ---
 
 ```{r setup, include=FALSE}
@@ -95,7 +96,7 @@ Uma árvore de decisão é um recurso gráfico que mapeia os possíveis resultad
 
 # Objetivo
 
-Partindo da problemática de desgaste (atrito), o presente relatório tem como propósito levantar a discussão sobre ela no segmento tecnológico, utilizando-se de um banco de dados ("HR Employee Attrition") disponibilizado pela IBM que apresenta informações sobre os funcionários da empresa. Os métodos utilizados neste projeto consistem de uma análise dos atributos e criação de um modelo utilizando o método Árvore de Decisão ID3, com o intuito de compreender os atributos que levam ao fenômeno de atrito e servir como aporte para prever a ocorrência de desgaste de funcionários da empresa e compreencê-la.
+Partindo da problemática de desgaste (atrito), o presente relatório tem como propósito levantar a discussão sobre ela no segmento tecnológico, utilizando-se de um banco de dados ("HR Employee Attrition") disponibilizado pela IBM que apresenta informações sobre os funcionários da empresa. Os métodos utilizados neste projeto consistem de uma análise dos atributos e criação de um modelo utilizando o método Árvore de Decisão ID3, com o intuito de compreender os atributos que levam ao fenômeno de atrito e servir como aporte para prever a ocorrência de desgaste de funcionários da empresa e compreencê-la. Todas as manipulações e aplicações de métodos foram feitas utilizando a linguagem R atráves do RStudio.
 
 # Metodologia
 
@@ -154,7 +155,7 @@ Além disso, com os números de nós definidos, os atributos que se mantiveram n
 
 ## Reamostragem Hold-Out
 
-Para o processo de teste do algoritmo, será utilizada o método de Reamostragem Hold-out. Que consiste em separar o conjunto de dados em um conjunto de treino e conjunto de teste aleatoriamente. O algoritmo irá agrupar $\frac{2}{3}$ das informações no conjunto de treino e $\frac{1}{3}$ das informações no conjunto de teste \cite{berrar2019cross}. Com isso, no final do ajuste da Árvore de Decisão ID3, será possível fazer uma última análise se o algoritmo se comporta bem aos dados. 
+Para o processo de teste do algoritmo, será utilizada o método de Reamostragem Hold-out. Que consiste em separar o conjunto de dados em um conjunto de treino e conjunto de teste aleatoriamente. O algoritmo irá agrupar $\frac{2}{3}$ das informações no conjunto de treino e $\frac{1}{3}$ das informações no conjunto de teste. Com isso, no final do ajuste da Árvore de Decisão ID3, será possível fazer uma última análise se o algoritmo se comporta bem aos dados. 
 
 # Dados
 
@@ -435,8 +436,6 @@ Essa insignificância também ocorre em outras variáveis, como: educação, ár
 
 # Aplicação
 
-A figura \ref{fig:arvore} mostra a poda da árvore de decisão para o problema proposto, tendo 8 níveis e 15 nós em sua estrutura, desencadeando em 16 folhas.
-
 ```{r}
 dados$Desgaste = factor(dados$Desgaste, levels = c('Sim','Nao'))
 
@@ -450,21 +449,43 @@ test <- dados[-amostra,]
 fit = rpart(formula = Desgaste ~ ., method = 'class', data = train, parms = list(split = 'information'))
 ```
 
+A figura \ref{fig:arvore} mostra o resultado da aplicação da árvore de decisão ID3 para o problema proposto, tendo 8 níveis e 15 \emph{nós decisão} em sua estrutura, desencadeando em 16 \emph{nós folha}. Em cada nó de decisão, um teste é feito, e se a resposta é "Sim" a árvore segue em sequência para a esquerda em outro nó, caso contrário, a árvore segue à direita. Como podemos ver, todas as variáveis foram transformadas em atributos binários para os testes nos \emph{nós decisão}, incluindo as variáveis numéricas. Nos \emph{nós folha}, temos a proporção de indíviduos agrupados neles e quantos tiveram ou não desgaste. Como por exemplo, o \emph{nó folha} mais a direita, agrupou 67% dos indivíduos como se não houvesse desgaste, porém 55 deles relataram desgaste e 597 realmente não relataram. Independente do \emph{nó folha}, à esquerda está a quantidade de pessoas com desgaste e à direita está a quantidade de pessoas sem desgaste.
+
 ```{r arvore, fig.width= 9.5, fig.height= 6, echo=FALSE, fig.cap="Árvore de decisão para o estudo de demissões em empresa.\\label{fig:arvore}",out.width = '70%'}
-rpart.plot(fit, type=0, extra=101, box.palette="lightgreen", branch.lty = 2, nn=TRUE, cex=0.6, fallen.leaves = F, branch.col = "brown")
+rpart.plot(fit, type=0, extra=101, box.palette="lightgreen", branch.lty = 2, nn=TRUE, cex=0.65, fallen.leaves = F, branch.col = "brown")
 ```
 
 ```{r}
-predict(fit, newdata = train, type = "class") %>%
-  table(train$Desgaste, .) %>%
-  confusionMatrix()
+# predict(fit, newdata = train, type = "class") %>%
+#   table(train$Desgaste, .) %>%
+#   confusionMatrix()
+
+# Acurácia --> 0.89
 ```
 
+Na Tabela \ref{tab:conf} estão as matrizes de confusão do conjunto de treino e do conjunto de teste. Na esquerda da matriz, são os medidas verdadeiras, e em cima, são as predições atráves da árvore de decisão utilizada. Como podemos notar, há uma tendência em o algoritmo classificar os indivíduos em "Não Desgaste", do que "Desgaste".
+
+A acurácia do treino foi de 89% e a do teste foi de 86,7%. Como as acurácias foram próximas uma da outra, podemos também afirmar que não houve um super-ajuste do classificador.
+
+\begin{table}[H]
+\centering
+\caption{Matrizes de Confusão (Desgaste).}\label{tab:conf}
+\begin{tabular}{lll|ll}
+    & \multicolumn{2}{l|}{Treino} & \multicolumn{2}{l}{Teste} \\ \cline{2-5} 
+    & Sim          & Nao          & Sim         & Nao         \\
+Sim & 71           & 97           & 22          & 47          \\
+Nao & 11           & 801          & 18          & 403        
+\end{tabular}
+\end{table}
+
 ```{r}
-predict(fit, newdata = test, type = "class") %>%
-  table(test$Desgaste, .) %>%
-  confusionMatrix()
+# predict(fit, newdata = test, type = "class") %>%
+#   table(test$Desgaste, .) %>%
+#   confusionMatrix()
+
+# Acurácia --> 0.867
 ```
+
 
 
 # Conclusão
