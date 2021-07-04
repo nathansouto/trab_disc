@@ -446,12 +446,10 @@ train <- dados[amostra,]
 test <- dados[-amostra,]
 
 fit = rpart(formula = Desgaste ~ ., method = 'class', data = train, parms = list(split = 'information'))
+```
 
-names(fit$variable.importance)
-
-fit$cptable
-printcp(fit)
-plotcp(fit)
+```{r, fig.width= 9.5, fig.height= 6}
+rpart.plot(fit, type=0, extra=101, box.palette="lightgreen", branch.lty = 2, nn=TRUE, cex=0.6, fallen.leaves = F, branch.col = "brown")
 ```
 
 ```{r}
@@ -464,10 +462,6 @@ predict(fit, newdata = train, type = "class") %>%
 predict(fit, newdata = test, type = "class") %>%
   table(test$Desgaste, .) %>%
   confusionMatrix()
-```
-
-```{r}
-rpart.plot(fit, type=0, extra=101, box.palette="lightgreen", branch.lty = 2, nn=TRUE, cex=0.7, fallen.leaves = F, branch.col = "brown")
 ```
 
 
