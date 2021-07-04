@@ -198,7 +198,7 @@ prop.table(t)
 ```
 
 ```{r}
-with(dados, table(Departamento, Desgaste))
+with(dados, table(StatusRelacionamento, Desgaste))
 ```
 
 ```{r}
@@ -273,5 +273,5 @@ predict(fit, newdata = test, type = "class") %>%
 ```
 
 ```{r}
-rpart.plot(fit, type=0, extra=101, box.palette="gray", branch.lty = 3, nn=TRUE, cex=0.7, fallen.leaves = F)
+rpart.plot(fit, type=0, extra=101, box.palette="lightgreen", branch.lty = 2, nn=TRUE, cex=0.7, fallen.leaves = F, branch.col = "brown")
 ```
