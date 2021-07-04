@@ -438,22 +438,22 @@ Na tabela \ref{tab:desg_col}, encontra-se a relação entre a resposta de desgas
 
 Percebe-se que os funcionários que trabalham na empresa há menos de 3 anos tem uma probabilidade maior de ter desgaste no serviço do que aqueles que colaboram com a empresa há mais tempo.
 
-Na tabela \ref{tab:desg_nivel}, encontra-se a relação entre a resposta de desgaste e a variável de nível na empresa.
+Na tabela \ref{tab:desg_nivel}, encontra-se a relação entre a resposta de desgaste e a variável de nível no trabalho.
 
 \begin{table}[H]
 \centering
-\caption{Nível na empresa (a esquerda) X Desgaste (em cima).}\label{tab:desg_nivel}
+\caption{Nível no trabalho (a esquerda) X Desgaste (em cima).}\label{tab:desg_nivel}
 \begin{tabular}{rrr}
   \hline
  & Não & Sim \\ 
   \hline
-'< 2' & 0.737 & 0.263 \\ 
-'>= 2' & 0.889 & 0.101 \\ 
+igual a 1 & 0.737 & 0.263 \\ 
+diferente de 1 & 0.889 & 0.101 \\ 
    \hline
 \end{tabular}
 \end{table}
 
-Tem-se que os funcionários que possuem um nível na empresa inferior a 2 tem uma probabilidade maior de ter desgaste no serviço do que aqueles que possuem um nivel igual ou superior a 2.
+Tem-se que os funcionários que possuem um nível no trabalho igual a 1 tem uma probabilidade maior de ter desgaste no serviço do que aqueles que possuem um nível diferente de 1.
 
 Na tabela \ref{tab:desg_anos}, encontra-se a relação entre a resposta de desgaste e a variável de Anos na empresa.
 
