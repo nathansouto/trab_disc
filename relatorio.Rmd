@@ -84,40 +84,35 @@ Principal artigo da metodologia --> \cite{quinlan1986induction}
 
 # Introdução
 
-A área de Recursos Humanos é a responsável pelos bens mais valiosos de uma empresa: os seus funcionários. Logo, é comum que a maioria dos desafios que essa área enfrenta influencie diretamente eixos essenciais para o desenvolvimento e gestão de uma organização.
-Um dos fenômenos inerentes à área de recursos humanos é o desgaste de funcionários. Também chamado de atrito (do termo em inglês “attrition”), esse problema é caracterizado pela saída de um colaborador da empresa e pode ser considerado como a ordem natural da jornada de um colaborador até sua saída da empresa. Há muitos motivos que podem culminar na saída de um colaborador da organização, desde problemas internos que ele pode ter vindo a enfrentar, problemas pessoais, sua aposentadoria ou até mesmo sua demissão porque a empresa decidiu eliminar sua função (neste caso, não fazendo a contratação de um outro colaborador de imediato e deixando aquela posição vaga). \cite{xerpay}
+A área de recursos humanos é a responsável pelos bens mais valiosos de uma empresa: os seus funcionários. Logo, é comum que a maioria dos desafios que ela enfrenta influenciem diretamente em eixos essenciais para o desenvolvimento e gestão de uma organização.
 
-Esse problema tornou-se aparente na indústria tecnológica nos últimos anos. Segundo Michael Booz, Gerente Sênior do Programa de Insights da rede social de negócios LinkedIn, empresas de tecnologia lutam com a retenção de talentos e exibem uma taxa de rotação de funcionários de 13.2%, superior a qualquer outro setor empresarial. \cite{booz2018turnover} Mesmo startups do Vale do Silício, que encantam os funcionários ao apostarem em ambientes de trabalho deslumbrantes e com benefícios diferenciados, demonstram dificuldades a reter seus funcionários: a duração média dos funcionários na startup de transporte privado urbano Uber, calculada em 2017, era de apenas 1,8 anos. \cite{fagan2018silicon}
+Um dos fenômenos inerentes à área de recursos humanos é o desgaste de funcionários. Também chamado de atrito (do termo em inglês “attrition”), esse problema é caracterizado pela saída de um colaborador da empresa e pode ser considerado como a ordem natural de sua jornada. Porém, há muitos motivos que podem culminar na saída de um colaborador da organização, desde problemas internos que ele pode ter enfrentado, problemas pessoais, sua aposentadoria ou até mesmo necessidade por parte da empresa de eliminar sua função (neste caso, não fazendo a contratação de um outro colaborador de imediato e deixando aquela posição vaga). \cite{xerpay}
 
-Dessa forma, fica claro que o desgaste de funcionários é um problema que afeta todos os negócios independentemente da natureza de seu segmento ou porte. A saída de funcionários pode, além de afetar os resultados, criar custos significativos para um negócio, tais como referentes a possível interrupção de processos, a contratação de novos colaboradores e ao treinamento deles. Assim sendo, torna-se de interesse gerencial compreender os fatores que culminam no fenômeno de desgaste de funcionários e evitar que isso afete negativamente os negócios da organização.
+Esse problema tornou-se recorrente no mercado de tecnologia nos últimos anos. Segundo Michael Booz, Gerente Sênior do Programa de Insights da rede social de negócios LinkedIn, empresas de tecnologia lutam com a retenção de talentos e exibem uma taxa de rotação de funcionários de 13.2%, superior a qualquer outro setor empresarial. \cite{booz2018turnover} Mesmo startups do Vale do Silício, que encantam os funcionários ao apostarem em ambientes de trabalho deslumbrantes e com benefícios diferenciados, demonstram dificuldades a reter seus funcionários: em 2017, a média de carreira na startup de transporte privado urbano Uber era de apenas 1,8 anos. \cite{fagan2018silicon}
+
+Dessa forma, fica claro que o desgaste de funcionários é um problema que afeta todos os negócios independentemente da natureza de seu segmento ou porte. A saída de colaboradores pode, além de afetar os resultados, criar custos significativos para uma empresa, tais como aqueles referentes à possível interrupção de processos e à contratação de novos funcionários e seus treinamentos. Assim sendo, torna-se de interesse gerencial compreender os fatores que culminam no fenômeno de desgaste de colaboradores e evitar que isso afete negativamente os negócios da organização.
+
 Nesse contexto, a visualização de uma árvore de decisão dos processos que levariam ao fenômeno do desgaste de funcionários de uma empresa se mostra um recurso de grande valia para o auxílio à tomada de decisão da área de recursos humanos. 
 
 Uma árvore de decisão é um recurso gráfico que mapeia os possíveis resultados de uma série de escolhas relacionadas, permitindo que uma organização compare possíveis ações com base em seus custos, probabilidades e benefícios. O método ID3 é um algoritmo para construção de árvore de decisão amplamente aplicado nas mais diversas áreas de estudo. Entre os benefícios de sua aplicação destacam-se o fato de que a construção de uma pequena árvore é feita em um tempo relativamente curto, além de que regras de previsão compreensíveis são criadas a partir dos dados de treinamento. \cite{koerich}
 
 # Objetivo
 
-Partindo da problemática de desgaste (atrito), o presente relatório tem como propósito levantar a discussão sobre ela no segmento tecnológico, utilizando-se de um banco de dados ("HR Employee Attrition") disponibilizado pela IBM que apresenta informações sobre os funcionários da empresa. Os métodos utilizados neste projeto consistem de uma análise dos atributos e criação de um modelo utilizando o método Árvore de Decisão ID3, com o intuito de compreender os atributos que levam ao fenômeno de atrito e servir como aporte para prever a ocorrência de desgaste de funcionários da empresa e compreencê-la. Todas as manipulações e aplicações de métodos foram feitas utilizando a linguagem R atráves do RStudio.
+Partindo da problemática de desgaste (atrito), o presente relatório tem como propósito levantar a discussão sobre ela no segmento tecnológico, utilizando-se de um banco de dados ("HR Employee Attrition") disponibilizado pela IBM que apresenta informações sobre os funcionários da empresa. Os métodos utilizados neste projeto consistem em uma análise dos atributos e criação de um modelo utilizando o método Árvore de Decisão ID3, com o intuito de compreender os atributos que levam ao fenômeno de atrito e servir como aporte para prever a ocorrência de desgaste de funcionários da empresa e compreendê-la. Todas as manipulações e aplicações de métodos foram feitas utilizando a linguagem R atráves do RStudio.
 
 # Metodologia
 
---> Parte mais importante segundo a hildete
-
-- Arvore de Decisao ID3 (explicar cada detalhe)
-  - Entropia
-  - Information Gain
-
-- Validação utilizada --> hold-out
 
 ## Árvore de Decisão ID3
 
 As Árvores de Decisão são métodos práticos de aprendizagem indutiva para aproximação de funções de valores discretos \cite{koerich}. Isto é, elas agrupam os dados com base em sequências de testes semelhantes a testes cognitivos (binários ou multinomiais) e chegam a um determinado agrupamento das informações com base nestas operações. Uma árvore de decisão é uma estrutura de dados definida recursivamente como: \cite{quinlan1986induction, monard2003induccao}
 
 \begin{enumerate}
-  \item \emph{nó decisão} que contém um teste sobre algum atributo da instância. Para cada resultado do teste existe uma aresta para uma subárvore. Cada subárvore tem a mesma estrutura que a árvore
-  \item \emph{nó folha} que corresponde a uma classificação final
+  \item \emph{nó decisão} que contém um teste sobre algum atributo da instância. Para cada resultado do teste existe uma aresta para uma subárvore. Cada subárvore tem a mesma estrutura que a árvore;
+  \item \emph{nó folha} que corresponde a uma classificação final.
 \end{enumerate}
   
-Na Figura \ref{fig:exemplo} temos um exemplo simples dessa metodologia para o diagnóstico de um paciente. Nela podemos ver os nós citados acima. Os nós em formato redondo são os \emph{nós decisão} e os de formato retangular são os \emph{nós folha}. O primeiro nó da árvore é também chamado de \emph{nó raiz}. \cite{monard2003induccao}
+Na Figura \ref{fig:exemplo} há um exemplo simples dessa metodologia para o diagnóstico de um paciente. Nela pode-se ver os nós citados acima. Os nós em formato redondo são os \emph{nós decisão} e os de formato retangular são os \emph{nós folha}. O primeiro nó da árvore é também chamado de \emph{nó raiz}. \cite{monard2003induccao}
   
 ```{r pressure, echo=FALSE, fig.cap="Uma árvore de decisão simples para o diagnótico de um paciente.\\label{fig:exemplo}",out.width = '70%'}
 knitr::include_graphics("imagem_exemplo.png")
@@ -140,18 +135,18 @@ Com isso, o valor esperado da entropia do atributo A têm a seguinte fórmula $$
 Além de definir quais são os melhores atributos a serem incorporados na árvore de decisão, a medida Information Gain também é utilizada pelo algoritmo para ajustar da melhor forma todas as variáveis para serem categóricas binárias. Ele segue o procedimento:
 
 \begin{enumerate}
-  \item caso a varíavel seja categórica binária, ou númerica binária, o algoritmo mantém o formato da variável
-  \item caso a variável seja categória com 3 ou mais categorias, o algoritmo seleciona a melhor divisão das categorias em 2 subgrupos e a torna em uma variável categórica binária. Essa seleção dos subgrupos é feita escolhendo o melhor Information Gain de todas as possíveis divisões \cite{koerich}
-  \item caso a variável seja númerica, o algoritmo seleciona o melhor valor $c$, que pertence ao intervalo da variável, para separa-lá em 2 intervalos, onde um será o intervalo positivo e o outro será o negativo. Por exemplo: Caso $Salário <= 1000$ então positivo, se $Salário > 1000$ então negativo. Esse separação também é feita escolhendo o melhor Information Gain de todos os possíveis valores $c$ pertecentes ao intervalo \cite{koerich}
+  \item caso a varíavel seja categórica binária, ou númerica binária, o algoritmo mantém o formato da variável;
+  \item caso a variável seja categória com 3 ou mais categorias, o algoritmo seleciona a melhor divisão das categorias em 2 subgrupos e a torna em uma variável categórica binária. Essa seleção dos subgrupos é feita escolhendo o melhor Information Gain de todas as possíveis divisões; \cite{koerich}
+  \item caso a variável seja númerica, o algoritmo seleciona o melhor valor $c$, que pertence ao intervalo da variável, para separá-la em 2 intervalos, em que um será o intervalo positivo e o outro será o negativo. Por exemplo: Caso $Salário <= 1000$ então positivo, se $Salário > 1000$ então negativo. Essa separação também é feita escolhendo o melhor Information Gain de todos os possíveis valores $c$ pertecentes ao intervalo. \cite{koerich}
 \end{enumerate}
 
 ## Número de Nós
 
-Com os critérios definidos do funcionamento da árvore de decisão ID3, é possível criar uma árvore utilizando todas as variáveis dispóniveis como atributos nos \emph{nós decisão}. Porém, isso pode acabar super-ajustando os dados, fazendo com que o algoritmo funcione muito bem somente para o conjunto de treinamento de dados. 
+Com os critérios definidos do funcionamento da árvore de decisão ID3, é possível criar uma árvore utilizando todas as variáveis dispóniveis como atributos nos \emph{nós decisão}. Porém, isso pode acabar super-ajustando os dados, fazendo com que o algoritmo funcione muito bem somente para o conjunto de treinamento.
 
 Para evitar o super-ajuste, é realizada uma "poda" na árvore de decisão, definindo um número ótimo de nós e seus atributos. Para essa escolha, dentro do conjunto de treino, o algoritmo o separa em dois grupos: "treino" e "poda". A árvore é então criada a partir do grupo "treino" e é validada pelo grupo "poda". Essa poda é feita na quantidade de nós em que o erro de classificação começa a divergir entre o grupo "treino" e o gruopo "poda". Pode ser que não seja o menor erro dentro do conjunto de treino, mas assim não há o super-ajuste dos dados. \cite{monard2003induccao}.
 
-Além disso, com os números de nós definidos, os atributos que se mantiveram na árvore, também são os atributos que melhor classificam às informações, ou seja, possuem o maior Information Gain.
+Além disso, com os números de nós definidos, os atributos que se mantiveram na árvore também são os atributos que melhor classificam às informações, ou seja, possuem o maior Information Gain.
 
 ## Reamostragem Hold-Out
 
@@ -159,11 +154,8 @@ Para o processo de teste do algoritmo, será utilizada o método de Reamostragem
 
 # Dados
 
-Descrição dos dados com as devidas análises explorátorias (analise geral por cima de todos, descrição dos dados e relação com o desgaste).
-Tabelas de contingência + gráficos
-
-O banco de dados conta com 35 variáveis e 1470 observações. As variáveis são relacionadas ao trabalho e algumas relacionadas a vida pessoal dos funcionários. Os dados possuem variáveis categóricas e numéricas.
-As principais variáveis que foram mais performáticas para o modelo de árvore de decisão, ou seja, obtiveram um maior Information Gain, estão descritas na Tabela \ref{tab:desc_dados}.
+O banco de dados conta com 35 variáveis e 1470 observações. As variáveis são relacionadas ao trabalho e algumas relacionadas à vida pessoal dos funcionários, sendo tanto categóricas quanto numéricas.
+As variáveis que foram mais performáticas para o modelo de árvore de decisão, ou seja, obtiveram um maior Information Gain, estão descritas na Tabela \ref{tab:desc_dados}.
 
 \begin{table}[H]
 \caption{Variáveis e suas descrições.}\label{tab:desc_dados}
@@ -298,7 +290,7 @@ Sim & 237 & 0.16 \\
 \end{tabular}
 \end{table}
 
-Cerca de 16% dos funcionários da empresa, tem um desgaste com o serviço. E para entender esses desgastes, o modelo de árvore de decisão resumirá quais das demais variáveis influenciam para a resposta do desgaste ser sim ou não.
+Nota-se que cerca de 16% dos funcionários da empresa tem um desgaste com o serviço e, para entender esses desgastes, o modelo de árvore de decisão resumirá quais das demais variáveis influenciam para a resposta do desgaste ser sim ou não.
 
 Na tabela \ref{tab:desg_hrex}, encontra-se a relação entre a resposta de desgaste e a variável de horas extras através de uma tabela de contingência.
 
@@ -315,9 +307,9 @@ Não & 0.896 & 0.104 \\
 \end{tabular}
 \end{table}
 
-Percebe-se que os funcionários que fazem horas extras tem uma probabilidade maior de ter desgaste no serviço do que aqueles que não fazem o tempo a mais de serviço.
+Percebe-se que os funcionários que fazem horas extras tem uma probabilidade maior de ter desgaste no serviço do que aqueles que não trabalham além da jornada.
 
-Na tabela \ref{tab:desg_status}, encontra-se a relação entre a resposta de desgaste e a variável de status do relacionamento através de uma tabela de contingência.
+A tabela \ref{tab:desg_status} mostra a relação entre a resposta de desgaste e a variável de status do relacionamento e as proporções dos grupos que formam.
 
 \begin{table}[H]
 \centering
@@ -332,7 +324,7 @@ Solteiro (a) & 0.745 & 0.255 \\
 \end{tabular}
 \end{table}
 
-Percebe-se que os funcionários que são solteiros tem uma probabilidade maior de ter desgaste no serviço do que aqueles que são casados ou divorciados.
+É possível observar que os funcionários que são solteiros tem uma probabilidade maior de ter desgaste no serviço do que aqueles que são casados ou divorciados.
 
 Na tabela \ref{tab:desg_cargo}, encontra-se a relação entre a resposta de desgaste e a variável de cargo através de uma tabela de contingência.
 
@@ -539,7 +531,7 @@ test <- dados[-amostra,]
 fit = rpart(formula = Desgaste ~ ., method = 'class', data = train, parms = list(split = 'information'))
 ```
 
-A figura \ref{fig:arvore} mostra o resultado da aplicação da árvore de decisão ID3 para o problema proposto, tendo 8 níveis e 15 \emph{nós decisão} em sua estrutura, desencadeando em 16 \emph{nós folha}. Em cada nó de decisão, um teste é feito, e se a resposta é "Sim" a árvore segue em sequência para a esquerda em outro nó, caso contrário, a árvore segue à direita. Como podemos ver, todas as variáveis foram transformadas em atributos binários para os testes nos \emph{nós decisão}, incluindo as variáveis numéricas. Nos \emph{nós folha}, temos a proporção de indíviduos agrupados neles e quantos tiveram ou não desgaste. Como por exemplo, o \emph{nó folha} mais a direita, agrupou 67% dos indivíduos como se não houvesse desgaste, porém 55 deles relataram desgaste e 597 realmente não relataram. Independente do \emph{nó folha}, à esquerda está a quantidade de pessoas com desgaste e à direita está a quantidade de pessoas sem desgaste.
+A figura \ref{fig:arvore} mostra o resultado da aplicação da árvore de decisão ID3 para o problema proposto, tendo 8 níveis e 15 \emph{nós decisão} em sua estrutura, desencadeando em 16 \emph{nós folha}. Em cada nó de decisão um teste é feito, e se a resposta é "Sim" a árvore segue em sequência para a esquerda em outro nó; caso contrário, a árvore segue à direita. Como é possível notar, todas as variáveis foram transformadas em atributos binários para os testes nos \emph{nós decisão}, incluindo as variáveis numéricas. Nos \emph{nós folha}, está a proporção de indíviduos agrupados neles e quantos tiveram ou não desgaste. Por exemplo, o \emph{nó folha} mais a direita agrupou 67% dos funcionários como se não houvessem tido desgaste, porém 55 deles relataram desgaste e 597 realmente não o relataram. Independentemente do \emph{nó folha}, à esquerda está a quantidade de pessoas com desgaste e à direita está a quantidade de pessoas sem desgaste.
 
 ```{r arvore, fig.width= 9.5, fig.height= 6, echo=FALSE, fig.cap="Árvore de decisão para o estudo de demissões em empresa.\\label{fig:arvore}",out.width = '70%'}
 rpart.plot(fit, type=0, extra=101, box.palette="lightgreen", branch.lty = 2, nn=TRUE, cex=0.65, fallen.leaves = F, branch.col = "brown")
@@ -553,9 +545,9 @@ rpart.plot(fit, type=0, extra=101, box.palette="lightgreen", branch.lty = 2, nn=
 # Acurácia --> 0.89
 ```
 
-Na Tabela \ref{tab:conf} estão as matrizes de confusão do conjunto de treino e do conjunto de teste. Na esquerda da matriz, são os medidas verdadeiras, e em cima, são as predições atráves da árvore de decisão utilizada. Como podemos notar, há uma tendência em o algoritmo classificar os indivíduos em "Não Desgaste", do que "Desgaste".
+Na Tabela \ref{tab:conf} estão as matrizes de confusão do conjunto de treino e do conjunto de teste. Na esquerda da matriz estão as medidas verdadeiras, e em cima encontram-se as predições atráves da árvore de decisão utilizada. Nota-se uma tendência em o algoritmo classificar mais indivíduos em "Não Desgaste" do que em "Desgaste".
 
-A acurácia do treino foi de 89% e a do teste foi de 86,7%. Como as acurácias foram próximas uma da outra, podemos também afirmar que não houve um super-ajuste do classificador.
+A acurácia do treino foi de 89% enquanto a do teste foi de 86,7%. Como as acurácias foram próximas, é possível também afirmar que não houve um super-ajuste do classificador.
 
 \begin{table}[H]
 \centering
@@ -578,9 +570,11 @@ Nao & 11           & 801          & 18          & 403
 
 # Conclusão
 
-Com a construção da árvore de decisão na Figura \ref{fig:arvore} podemos notar que os \emph{nós folha} com a resposta "Sim" para o desgaste tem uma proporção de indivíduos agrupados menor do que a resposta "Não", como já era esperado, dado que o conjunto de dados possui mais funcionários que não relataram desgaste do que ao contrário, como podemos ver na Tabela \ref{tab:desgaste}.
+Com a construção da árvore de decisão, a Figura \ref{fig:arvore} permite notar que os \emph{nós folha} com a resposta "Sim" para o desgaste tem uma proporção de indivíduos agrupados menor do que a resposta "Não", o que já era esperado dado que o conjunto de dados possui mais funcionários que não relataram desgaste do que o contrário, como mostra a Tabela \ref{tab:desgaste}.
 
-Além disso, pela árvore, podemos ver as possíveis causas de desgaste dos funcionários. Cada \emph{nó decisão} possui um atributo que obteve um Information Gain alto em comparação aos demais. Como explicado na Metodologia, o \emph{nó raiz} é o que possui o maior Information Gain que decai ao longo dos níveis da árvore. Portanto, as variáveis que melhor diminuem a entropia dos dados são HoraExtra, StatusRelacionamento, Anos Colaboracao e todas as demais que estão nos \emph{nós decisão} da árvore, ou seja, essas variáveis são as mais decisivas para o funcionário ter ou não desgaste.
+Além disso, através da árvore é possível observar as possíveis causas de desgaste dos funcionários. Cada \emph{nó decisão} possui um atributo que obteve um Information Gain alto em comparação aos demais. Como explicado na Metodologia, o \emph{nó raiz} é o que possui o maior Information Gain, que decai ao longo dos níveis da árvore. 
+
+Portanto, as variáveis que melhor diminuem a entropia dos dados são HoraExtra, StatusRelacionamento, AnosColaboracao e todas as demais que estão nos \emph{nós decisão} da árvore, isto é, são essas as variáveis mais decisivas para o funcionário ter ou não desgaste.
 
 \clearpage
 \bibliographystyle{plain}
