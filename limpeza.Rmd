@@ -200,7 +200,12 @@ prop.table(t)
 ```
 
 ```{r}
-with(dados, table(StatusRelacionamento, Desgaste))
+dados2 <- dados
+
+dados2$calculo[dados2$NumeroEmpregados < 919] <- "< 919"
+dados2$calculo[dados2$NumeroEmpregados >= 919] <- ">= 919"
+
+with(dados2, table(calculo, Desgaste))
 ```
 
 ```{r}

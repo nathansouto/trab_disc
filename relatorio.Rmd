@@ -21,6 +21,7 @@ output:
     fig_crop: no
   html_document:
     df_print: paged
+  link_citations: true
 ---
 
 ```{r setup, include=FALSE}
@@ -95,7 +96,7 @@ Uma árvore de decisão é um recurso gráfico que mapeia os possíveis resultad
 
 # Objetivo
 
-Partindo da problemática de desgaste (atrito), o presente relatório tem como propósito levantar a discussão sobre ela no segmento tecnológico, utilizando-se de um banco de dados ("HR Employee Attrition") disponibilizado pela IBM que apresenta informações sobre os funcionários da empresa. Os métodos utilizados neste projeto consistem de uma análise dos atributos e criação de um modelo utilizando o método Árvore de Decisão ID3, com o intuito de compreender os atributos que levam ao fenômeno de atrito e servir como aporte para prever a ocorrência de desgaste de funcionários da empresa e compreencê-la.
+Partindo da problemática de desgaste (atrito), o presente relatório tem como propósito levantar a discussão sobre ela no segmento tecnológico, utilizando-se de um banco de dados ("HR Employee Attrition") disponibilizado pela IBM que apresenta informações sobre os funcionários da empresa. Os métodos utilizados neste projeto consistem de uma análise dos atributos e criação de um modelo utilizando o método Árvore de Decisão ID3, com o intuito de compreender os atributos que levam ao fenômeno de atrito e servir como aporte para prever a ocorrência de desgaste de funcionários da empresa e compreencê-la. Todas as manipulações e aplicações de métodos foram feitas utilizando a linguagem R atráves do RStudio.
 
 # Metodologia
 
@@ -154,7 +155,7 @@ Além disso, com os números de nós definidos, os atributos que se mantiveram n
 
 ## Reamostragem Hold-Out
 
-Para o processo de teste do algoritmo, será utilizada o método de Reamostragem Hold-out. Que consiste em separar o conjunto de dados em um conjunto de treino e conjunto de teste aleatoriamente. O algoritmo irá agrupar $\frac{2}{3}$ das informações no conjunto de treino e $\frac{1}{3}$ das informações no conjunto de teste \cite{berrar2019cross}. Com isso, no final do ajuste da Árvore de Decisão ID3, será possível fazer uma última análise se o algoritmo se comporta bem aos dados. 
+Para o processo de teste do algoritmo, será utilizada o método de Reamostragem Hold-out. Que consiste em separar o conjunto de dados em um conjunto de treino e conjunto de teste aleatoriamente. O algoritmo irá agrupar $\frac{2}{3}$ das informações no conjunto de treino e $\frac{1}{3}$ das informações no conjunto de teste. Com isso, no final do ajuste da Árvore de Decisão ID3, será possível fazer uma última análise se o algoritmo se comporta bem aos dados. 
 
 # Dados
 
@@ -286,7 +287,7 @@ Na tabela \ref{tab:desgaste}, tem-se a quantidade de resgistros para cada tipo d
 
 \begin{table}[H]
 \centering
-\caption{Hora Extra (a esquerda) X Desgaste (em cima).}\label{tab:desgaste}
+\caption{Informações da variável Desgaste}\label{tab:desgaste}
 \begin{tabular}{rrr}
   \hline
 Desgaste & Total & Frequência \\ 
@@ -301,26 +302,20 @@ Cerca de 16% dos funcionários da empresa, tem um desgaste com o serviço. E par
 
 Na tabela \ref{tab:desg_hrex}, encontra-se a relação entre a resposta de desgaste e a variável de horas extras através de uma tabela de contingência.
 
-```{r}
-#with(dados, table(HoraExtra, Desgaste)) %>%
-#  xtable::xtable()
-```
-
 \begin{table}[H]
 \centering
 \caption{Hora Extra (a esquerda) X Desgaste (em cima).}\label{tab:desg_hrex}
 \begin{tabular}{rrr}
   \hline
- & Nao & Sim \\ 
+ & Nãoo & Sim \\ 
   \hline
-Nao & 0.896 & 0.104 \\ 
+Não & 0.896 & 0.104 \\ 
   Sim & 0.695 & 0.305 \\ 
    \hline
 \end{tabular}
 \end{table}
 
-Percebe-se que os funcionários que fazem horas extras tem uma probabilidade maior de ter desgaste no serviço do que aqueles que não fazem o tempo a mais de serviço. O que faz sentido, dado que quanto mais tempo você passa no trabalho, mais você se desgasta.
-
+Percebe-se que os funcionários que fazem horas extras tem uma probabilidade maior de ter desgaste no serviço do que aqueles que não fazem o tempo a mais de serviço.
 
 Na tabela \ref{tab:desg_status}, encontra-se a relação entre a resposta de desgaste e a variável de status do relacionamento através de uma tabela de contingência.
 
@@ -332,7 +327,7 @@ Na tabela \ref{tab:desg_status}, encontra-se a relação entre a resposta de des
  & Não & Sim \\ 
   \hline
 Solteiro (a) & 0.745 & 0.255 \\ 
-  Outras & 0.883 & 0.117 \\ 
+  Outros & 0.883 & 0.117 \\ 
    \hline
 \end{tabular}
 \end{table}
@@ -346,7 +341,7 @@ Na tabela \ref{tab:desg_cargo}, encontra-se a relação entre a resposta de desg
 \caption{Cargo (a esquerda) X Desgaste (em cima).}\label{tab:desg_cargo}
 \begin{tabular}{rrr}
   \hline
- & Nao & Sim \\ 
+ & Não & Sim \\ 
   \hline
 pesquisador, tecnico de laboratorio e vendedor & 0.807 & 0.193 \\ 
 Demais cargos & 0.916 & 0.084 \\ 
@@ -364,7 +359,7 @@ Na tabela \ref{tab:desg_viaja}, encontra-se a relação entre a resposta de desg
 \caption{Viaja a trabalho (a esquerda) X Desgaste (em cima).}\label{tab:desg_viaja}
 \begin{tabular}{rrr}
   \hline
- & Nao & Sim \\ 
+ & Não & Sim \\ 
   \hline
 viaja frequentemente & 0.751 & 0.249 \\ 
 Outros & 0.859 & 0.141 \\ 
@@ -382,7 +377,7 @@ Na tabela \ref{tab:desg_satistrab}, encontra-se a relação entre a resposta de 
 \caption{Satisfação no trabalho (a esquerda) X Desgaste (em cima).}\label{tab:desg_satistrab}
 \begin{tabular}{rrr}
   \hline
- & Nao & Sim \\ 
+ & Não & Sim \\ 
   \hline
 Alto, baixo e médio & 0.817 & 0.183 \\ 
 Muito Alto & 0.887 & 0.113 \\ 
@@ -399,7 +394,7 @@ Na tabela \ref{tab:desg_depar}, encontra-se a relação entre a resposta de desg
 \caption{Departamento (a esquerda) X Desgaste (em cima).}\label{tab:desg_depar}
 \begin{tabular}{rrr}
   \hline
- & Nao & Sim \\ 
+ & Não & Sim \\ 
   \hline
 Vendas & 0.794 & 0.206 \\ 
 Outros departamentos & 0.858 & 0.142 \\ 
@@ -409,33 +404,127 @@ Outros departamentos & 0.858 & 0.142 \\
 
 Percebe-se que os funcionários que pertencem ao departamento de vendas tem uma probabilidade maior de ter desgaste no serviço do que aqueles que pertence ao RH ou ao departamento de pesquisa e desenvolvimento.
 
+Na tabela \ref{tab:desg_renda}, encontra-se a relação entre a resposta de desgaste e a variável de renda através de uma tabela de contingência.
 
-Olhando um pouco para uma variável sexo, na tabela \ref{tab:desg_sexo}, foi construída uma tabela de contingência entre ela e o desgaste.
-
-```{r}
-#with(dados, table(Sexo, Desgaste)) %>%
-#  xtable::xtable()
-```
-
-\begin{table}[ht]
+\begin{table}[H]
 \centering
-\caption{Sexo X Desgaste.}\label{tab:desg_sexo}
+\caption{Renda (a esquerda) X Desgaste (em cima).}\label{tab:desg_renda}
 \begin{tabular}{rrr}
   \hline
- & Nao & Sim \\ 
+ & Não & Sim \\ 
   \hline
-Feminino & 0.852 &  0.148 \\ 
-  Masculino & 0.830 & 0.170 \\ 
+'< 4056' & 0.752 & 0.248 \\ 
+'>= 4056' & 0.892 & 0.108 \\ 
    \hline
 \end{tabular}
 \end{table}
 
-A partir da tabela, tem-se que as porcentagens de resposta sim para os sexos são: 14,8% e 17,0% para o sexo feminino e masculino respectivamente. Nota-se que não é uma diferença significativa, ou seja, a variável sexo não é uma variável significativa para decidir sobre o desgaste dos funcionários. 
-Essa insignificância também ocorre em outras variáveis, como: educação, área de educação, satisfação ambiental, envolvimento no trabalho, entre outras.
+Percebe-se que os funcionários que possuem uma renda inferior ao valor de 4.056 tem uma probabilidade maior de ter desgaste no serviço do que aqueles que possuem uma renda mensal superior ou igual a esse valor.
+
+Na tabela \ref{tab:desg_col}, encontra-se a relação entre a resposta de desgaste e a variável de anos de colaboração através de uma tabela de contingência.
+
+\begin{table}[H]
+\centering
+\caption{Anos de Colaboração (a esquerda) X Desgaste (em cima).}\label{tab:desg_col}
+\begin{tabular}{rrr}
+  \hline
+ & Não & Sim \\ 
+  \hline
+'< 3' & 0.561 & 0.439 \\ 
+'>= 3' & 0.864 & 0.136 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Percebe-se que os funcionários que trabalham na empresa há menos de 3 anos tem uma probabilidade maior de ter desgaste no serviço do que aqueles que colaboram com a empresa há mais tempo.
+
+Na tabela \ref{tab:desg_nivel}, encontra-se a relação entre a resposta de desgaste e a variável de nível no trabalho.
+
+\begin{table}[H]
+\centering
+\caption{Nível no trabalho (a esquerda) X Desgaste (em cima).}\label{tab:desg_nivel}
+\begin{tabular}{rrr}
+  \hline
+ & Não & Sim \\ 
+  \hline
+igual a 1 & 0.737 & 0.263 \\ 
+diferente de 1 & 0.889 & 0.101 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Tem-se que os funcionários que possuem um nível no trabalho igual a 1 tem uma probabilidade maior de ter desgaste no serviço do que aqueles que possuem um nível diferente de 1.
+
+Na tabela \ref{tab:desg_anos}, encontra-se a relação entre a resposta de desgaste e a variável de Anos na empresa.
+
+\begin{table}[H]
+\centering
+\caption{Anos na empresa (a esquerda) X Desgaste (em cima).}\label{tab:desg_anos}
+\begin{tabular}{rrr}
+  \hline
+ & Não & Sim \\ 
+  \hline
+'< 2' & 0.651 & 0.349 \\ 
+'>= 2' & 0.871 & 0.129 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Tem-se que os funcionários que possuem menos de 2 anos na empresa tem uma probabilidade maior de ter desgaste no serviço do que aqueles que possuem 2 ou mais anos na empresa.
+
+Na tabela \ref{tab:desg_diaria}, encontra-se a relação entre a resposta de desgaste e a variável Diaria.
+
+\begin{table}[H]
+\centering
+\caption{Diaria (a esquerda) X Desgaste (em cima).}\label{tab:desg_diaria}
+\begin{tabular}{rrr}
+  \hline
+ & Não & Sim \\ 
+  \hline
+'< 1324' & 0.839 & 0.161 \\ 
+'>= 1324' & 0.838 & 0.162 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Tem-se que a probabilidade de desgaste para as duas categorias de diária são aproximadamente iguais.
+
+Na tabela \ref{tab:desg_nume}, encontra-se a relação entre a resposta de desgaste e a variável número de empresas trabalhadas pelos funcionários.
+
+\begin{table}[H]
+\centering
+\caption{Nº empresas trabalhadas (a esquerda) X Desgaste (em cima).}\label{tab:desg_nume}
+\begin{tabular}{rrr}
+  \hline
+ & Não & Sim \\ 
+  \hline
+'< 5' & 0.854 & 0.146 \\ 
+'>= 5' & 0.782 & 0.218 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Tem-se que os funcionários que trabalhou em 5 ou mais empresas tem uma probabilidade maior de ter desgaste no serviço do que aqueles que trabalhou em menos de 5 empresas.
+
+Na tabela \ref{tab:desg_empr}, encontra-se a relação entre a resposta de desgaste e a variável número de empregados.
+
+\begin{table}[H]
+\centering
+\caption{Nº empregados (a esquerda) X Desgaste (em cima).}\label{tab:desg_empr}
+\begin{tabular}{rrr}
+  \hline
+ & Não & Sim \\ 
+  \hline
+'< 919' & 0.847 & 0.153 \\ 
+'>= 919' & 0.832 & 0.168 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Tem-se que os funcionários que trabalham em uma empresa que possui mais de 918 funcionários tem uma probabilidade maior de ter desgaste no serviço do que aqueles que trabalham em uma empresa que tem menos funcionários.
+
 
 # Aplicação
-
-A figura \ref{fig:arvore} mostra a poda da árvore de decisão para o problema proposto, tendo 8 níveis e 15 nós em sua estrutura, desencadeando em 16 folhas.
 
 ```{r}
 dados$Desgaste = factor(dados$Desgaste, levels = c('Sim','Nao'))
@@ -450,26 +539,48 @@ test <- dados[-amostra,]
 fit = rpart(formula = Desgaste ~ ., method = 'class', data = train, parms = list(split = 'information'))
 ```
 
+A figura \ref{fig:arvore} mostra o resultado da aplicação da árvore de decisão ID3 para o problema proposto, tendo 8 níveis e 15 \emph{nós decisão} em sua estrutura, desencadeando em 16 \emph{nós folha}. Em cada nó de decisão, um teste é feito, e se a resposta é "Sim" a árvore segue em sequência para a esquerda em outro nó, caso contrário, a árvore segue à direita. Como podemos ver, todas as variáveis foram transformadas em atributos binários para os testes nos \emph{nós decisão}, incluindo as variáveis numéricas. Nos \emph{nós folha}, temos a proporção de indíviduos agrupados neles e quantos tiveram ou não desgaste. Como por exemplo, o \emph{nó folha} mais a direita, agrupou 67% dos indivíduos como se não houvesse desgaste, porém 55 deles relataram desgaste e 597 realmente não relataram. Independente do \emph{nó folha}, à esquerda está a quantidade de pessoas com desgaste e à direita está a quantidade de pessoas sem desgaste.
+
 ```{r arvore, fig.width= 9.5, fig.height= 6, echo=FALSE, fig.cap="Árvore de decisão para o estudo de demissões em empresa.\\label{fig:arvore}",out.width = '70%'}
-rpart.plot(fit, type=0, extra=101, box.palette="lightgreen", branch.lty = 2, nn=TRUE, cex=0.6, fallen.leaves = F, branch.col = "brown")
+rpart.plot(fit, type=0, extra=101, box.palette="lightgreen", branch.lty = 2, nn=TRUE, cex=0.65, fallen.leaves = F, branch.col = "brown")
 ```
 
 ```{r}
-predict(fit, newdata = train, type = "class") %>%
-  table(train$Desgaste, .) %>%
-  confusionMatrix()
+# predict(fit, newdata = train, type = "class") %>%
+#   table(train$Desgaste, .) %>%
+#   confusionMatrix()
+
+# Acurácia --> 0.89
 ```
+
+Na Tabela \ref{tab:conf} estão as matrizes de confusão do conjunto de treino e do conjunto de teste. Na esquerda da matriz, são os medidas verdadeiras, e em cima, são as predições atráves da árvore de decisão utilizada. Como podemos notar, há uma tendência em o algoritmo classificar os indivíduos em "Não Desgaste", do que "Desgaste".
+
+A acurácia do treino foi de 89% e a do teste foi de 86,7%. Como as acurácias foram próximas uma da outra, podemos também afirmar que não houve um super-ajuste do classificador.
+
+\begin{table}[H]
+\centering
+\caption{Matrizes de Confusão (Desgaste).}\label{tab:conf}
+\begin{tabular}{lll|ll}
+    & \multicolumn{2}{l|}{Treino} & \multicolumn{2}{l}{Teste} \\ \cline{2-5} 
+    & Sim          & Nao          & Sim         & Nao         \\
+Sim & 71           & 97           & 22          & 47          \\
+Nao & 11           & 801          & 18          & 403        
+\end{tabular}
+\end{table}
 
 ```{r}
-predict(fit, newdata = test, type = "class") %>%
-  table(test$Desgaste, .) %>%
-  confusionMatrix()
-```
+# predict(fit, newdata = test, type = "class") %>%
+#   table(test$Desgaste, .) %>%
+#   confusionMatrix()
 
+# Acurácia --> 0.867
+```
 
 # Conclusão
 
-Comentar os resultados (tendência para não desgaste)
+Com a construção da árvore de decisão na Figura \ref{fig:arvore} podemos notar que os \emph{nós folha} com a resposta "Sim" para o desgaste tem uma proporção de indivíduos agrupados menor do que a resposta "Não", como já era esperado, dado que o conjunto de dados possui mais funcionários que não relataram desgaste do que ao contrário, como podemos ver na Tabela \ref{tab:desgaste}.
+
+Além disso, pela árvore, podemos ver as possíveis causas de desgaste dos funcionários. Cada \emph{nó decisão} possui um atributo que obteve um Information Gain alto em comparação aos demais. Como explicado na Metodologia, o \emph{nó raiz} é o que possui o maior Information Gain que decai ao longo dos níveis da árvore. Portanto, as variáveis que melhor diminuem a entropia dos dados são HoraExtra, StatusRelacionamento, Anos Colaboracao e todas as demais que estão nos \emph{nós decisão} da árvore, ou seja, essas variáveis são as mais decisivas para o funcionário ter ou não desgaste.
 
 \clearpage
 \bibliographystyle{plain}
