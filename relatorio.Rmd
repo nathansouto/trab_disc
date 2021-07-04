@@ -83,15 +83,19 @@ Principal artigo da metodologia --> \cite{quinlan1986induction}
 
 # Introdução
 
-Abrir a discussão sobre o desgaste dos funcionários - O que é isso? O que ela afeta? É uma realidade no Mundo, no Brasil?
+A área de Recursos Humanos é a responsável pelos bens mais valiosos de uma empresa: os seus funcionários. Logo, é comum que a maioria dos desafios que essa área enfrenta influencie diretamente eixos essenciais para o desenvolvimento e gestão de uma organização.
+Um dos fenômenos inerentes à área de recursos humanos é o desgaste de funcionários. Também chamado de atrito (do termo em inglês “attrition”), esse problema é caracterizado pela saída de um colaborador da empresa e pode ser considerado como a ordem natural da jornada de um colaborador até sua saída da empresa. Há muitos motivos que podem culminar na saída de um colaborador da organização, desde problemas internos que ele pode ter vindo a enfrentar, problemas pessoais, sua aposentadoria ou até mesmo sua demissão porque a empresa decidiu eliminar sua função (neste caso, não fazendo a contratação de um outro colaborador de imediato e deixando aquela posição vaga). \cite{xerpay}
 
-\cite{koerich, patel2014decisiontree, singh2014analysis}.
+Esse problema tornou-se aparente na indústria tecnológica nos últimos anos. Segundo Michael Booz, Gerente Sênior do Programa de Insights da rede social de negócios LinkedIn, empresas de tecnologia lutam com a retenção de talentos e exibem uma taxa de rotação de funcionários de 13.2%, superior a qualquer outro setor empresarial. \cite{booz2018turnover} Mesmo startups do Vale do Silício, que encantam os funcionários ao apostarem em ambientes de trabalho deslumbrantes e com benefícios diferenciados, demonstram dificuldades a reter seus funcionários: a duração média dos funcionários na startup de transporte privado urbano Uber, calculada em 2017, era de apenas 1,8 anos. \cite{fagan2018silicon}
 
---> Falar também sobre o método de arvóre de decisão ID3 (porque utilizar? vantagens?)
+Dessa forma, fica claro que o desgaste de funcionários é um problema que afeta todos os negócios independentemente da natureza de seu segmento ou porte. A saída de funcionários pode, além de afetar os resultados, criar custos significativos para um negócio, tais como referentes a possível interrupção de processos, a contratação de novos colaboradores e ao treinamento deles. Assim sendo, torna-se de interesse gerencial compreender os fatores que culminam no fenômeno de desgaste de funcionários e evitar que isso afete negativamente os negócios da organização.
+Nesse contexto, a visualização de uma árvore de decisão dos processos que levariam ao fenômeno do desgaste de funcionários de uma empresa se mostra um recurso de grande valia para o auxílio à tomada de decisão da área de recursos humanos. 
+
+Uma árvore de decisão é um recurso gráfico que mapeia os possíveis resultados de uma série de escolhas relacionadas, permitindo que uma organização compare possíveis ações com base em seus custos, probabilidades e benefícios. O método ID3 é um algoritmo para construção de árvore de decisão amplamente aplicado nas mais diversas áreas de estudo. Entre os benefícios de sua aplicação destacam-se o fato de que a construção de uma pequena árvore é feita em um tempo relativamente curto, além de que regras de previsão compreensíveis são criadas a partir dos dados de treinamento. \cite{koerich}
 
 # Objetivo
 
-"Sabendo da realidade do desgate de funcinários e seus problemas, foi (ou será) realizado uma análise e previsão ..."
+Partindo da problemática de desgaste (atrito), o presente relatório tem como propósito levantar a discussão sobre ela no segmento tecnológico, utilizando-se de um banco de dados ("HR Employee Attrition") disponibilizado pela IBM que apresenta informações sobre os funcionários da empresa. Os métodos utilizados neste projeto consistem de uma análise dos atributos e criação de um modelo utilizando o método Árvore de Decisão ID3, com o intuito de compreender os atributos que levam ao fenômeno de atrito e servir como aporte para prever a ocorrência de desgaste de funcionários da empresa e compreencê-la.
 
 # Metodologia
 
@@ -153,8 +157,28 @@ Além disso, com os números de nós definidos, os atributos que se mantiveram n
 Descrição dos dados com as devidas análises explorátorias (analise geral por cima de todos, descrição dos dados e relação com o desgaste).
 Tabelas de contingência + gráficos
 
-O banco de dados conta com 35 variáveis e 1470 observações. As variáveis são relacionadas ao trabalho e algumas relacionadas a vida pessoal dos funcionários. Os dados possue variáveis categóricas e numéricas.
-As principais variáveis que foram mais performáticas para o modelo de árvore de decisão são: HoraExtra (Se o funcionário costuma ou não fazer horas extras no trabalho), StatusRelacionamento (qual é o status do relacionamento do indivíduo), AnosColaboracao (o tempo de colaboração na vida), Cargo, NivelTrabalho (nivel do plano  de carreira do funcionário), ViagemTrabalho (frequência de viagens a trabalho), Diaria, AnosNaEmpresa (tempo que está na empresa), SatisfacaoTrabalho, Departamento, NumEmpresasTrabalhadas (quantidade de empresas que trabalhou na vida), Renda e NumeroEmpregados. A variável de decisão é a variável categórica Desgaste, toda a árvore é construída para tomar a decisão se um determinado funcionário (a partir do que se conhece das outras variáveis do modelo) está tendo um desgaste no trabalho, ou seja, a probabilidade dele tomar a decisão de querer sair da empresa.
+O banco de dados conta com 35 variáveis e 1470 observações. As variáveis são relacionadas ao trabalho e algumas relacionadas a vida pessoal dos funcionários. Os dados possuem variáveis categóricas e numéricas.
+As principais variáveis que foram mais performáticas para o modelo de árvore de decisão, ou seja, obtiveram um maior Information Gain, estão descritas na Tabela \ref{tab:desc_dados}.
+
+\begin{table}[H]
+\caption{Variáveis e suas descrições.}\label{tab:desc_dados}
+\begin{tabular}{l|l}
+\textbf{Variável (Atributo)} & \textbf{Descrição}                                              \\ \hline
+HoraExtra                    & Se o funcionário costuma ou não fazer horas extras no trabalho. \\
+StatusRelacionamento         & Status do relacionamento do funcionário                         \\
+AnosColaboracao              & Quantidade de anos de colaboração                               \\
+Cargo                        & Cargo na empresa                                                \\
+NivelTrabalho                & Nivél do plano de carreira atual                                \\
+ViagemTrabalho               & Frequência de viagens a trabalho                                \\
+AnosNaEmpresa                & Quantidade de anos na empresa                                   \\
+Diaria                       & Salário bruto diário                                            \\
+SatisfacaoTrabalho           & Satisfação do funcionário com o trabalho                        \\
+Departamento                 & Departamento do funcionário                                     \\
+NumEmpresasTrabalhadas       & Quantidade de empresas em que o funcionário já trabalhou        \\
+Renda                        & Renda Familiar                                                  \\
+NumeroEmpregados             & Número de empregados da empresa                                
+\end{tabular}
+\end{table}
 
 # Análise descritiva
 

@@ -251,7 +251,7 @@ test <- dados[-amostra,]
 
 fit = rpart(formula = Desgaste ~ ., method = 'class', data = train, parms = list(split = 'information'))
 
-fit$variable.importance
+names(fit$variable.importance)
 
 fit$cptable
 printcp(fit)
@@ -273,5 +273,5 @@ predict(fit, newdata = test, type = "class") %>%
 ```
 
 ```{r}
-rpart.plot(fit, type=0, extra=101, box.palette="gray", branch.lty = 3, nn=TRUE, cex=0.8)
+rpart.plot(fit, type=0, extra=101, box.palette="gray", branch.lty = 3, nn=TRUE, cex=0.7, fallen.leaves = F)
 ```
