@@ -250,24 +250,26 @@ colnames(dados) <- c("Idade", "Desgaste", "ViagemTrabalho",
                      "AnosUltimaPromocao", "AnosMesmoGerente")
 ```
 
-Para entender e visualizar melhor os dados e as variáveis, serão apresentados alguns gráficos e tabelas através de uma análise descritiva.
+Para entender e visualizar melhor os dados e as variáveis, serão apresentadas algumas tabelas através de uma análise descritiva.
 
-Na Figura \ref{fig:freq_cargo}, foi construído um gráfico da frequência relativa da resposta de desgaste por cargo. 
+Na tabela \ref{tab:desgaste}, tem-se a quantidade de resgistros para cada tipo de resposta da variável Desgaste, assim como a proporção de cada resposta.
 
-```{r, fig.cap="Frequência relativa das respostas de desgaste por cargo.\\label{fig:freq_cargo}", fig.pos="H"}
-dados %>%
-  group_by(Cargo, Desgaste) %>%
-  summarise(n = n()) %>%
-  mutate(freq = n / sum(n)) %>%
-  ggplot(aes(x=Desgaste, fill=Cargo)) +
-  geom_bar(size=3, position="dodge", aes(y = freq), stat = 'identity') +
-  xlab("Desgaste") +                             
-  ylab("Frequência relativa") 
-```
+\begin{table}[ht]
+\centering
+\caption{Hora Extra (a esquerda) X Desgaste (em cima).}\label{tab:desgaste}
+\begin{tabular}{rrr}
+  \hline
+Desgaste & Total & Frequência \\ 
+  \hline
+Sim & 237 & 0.16 \\ 
+  Não & 1233 & 0.84 \\ 
+   \hline
+\end{tabular}
+\end{table}
 
-Pode-se notar que o cargo que possui a maior frequência de resposta 'sim' é o técnico de laboratório, ou seja, quem tem esse cargo na empresa, tem uma probabilidade maior de ter um desgaste na empresa. E para o cargo de gerente, a probabilidade do funcionário ter um desgaste no trabalho é menor do que os demais cargos.
+Cerca de 16% dos funcionários da empresa, tem um desgaste com o serviço. E para entender esses desgastes, o modelo de árvore de decisão resumirá quais das demais variáveis influenciam para a resposta do desgaste ser sim ou não.
 
-Na tabela \ref{tab:desg_hrex}, encontra-se uma tabela de contingência da relação entre a resposta de desgaste e a variável de horas extras.
+Na tabela \ref{tab:desg_hrex}, encontra-se a relação entre a resposta de desgaste e a variável de horas extras através de uma tabela de contingência.
 
 ```{r}
 #with(dados, table(HoraExtra, Desgaste)) %>%
@@ -281,13 +283,102 @@ Na tabela \ref{tab:desg_hrex}, encontra-se uma tabela de contingência da relaç
   \hline
  & Nao & Sim \\ 
   \hline
-Nao & 944 & 110 \\ 
-  Sim & 289 & 127 \\ 
+Nao & 0.896 & 0.104 \\ 
+  Sim & 0.695 & 0.305 \\ 
    \hline
 \end{tabular}
 \end{table}
 
 Percebe-se que os funcionários que fazem horas extras tem uma probabilidade maior de ter desgaste no serviço do que aqueles que não fazem o tempo a mais de serviço. O que faz sentido, dado que quanto mais tempo você passa no trabalho, mais você se desgasta.
+
+
+Na tabela \ref{tab:desg_status}, encontra-se a relação entre a resposta de desgaste e a variável de status do relacionamento através de uma tabela de contingência.
+
+\begin{table}[ht]
+\centering
+\caption{Status Relacionamento (a esquerda) X Desgaste (em cima).}\label{tab:desg_status}
+\begin{tabular}{rrr}
+  \hline
+ & Não & Sim \\ 
+  \hline
+Solteiro (a) & 0.745 & 0.255 \\ 
+  Outras & 0.883 & 0.117 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Percebe-se que os funcionários que são solteiros tem uma probabilidade maior de ter desgaste no serviço do que aqueles que são casados ou divorciados.
+
+Na tabela \ref{tab:desg_cargo}, encontra-se a relação entre a resposta de desgaste e a variável de cargo através de uma tabela de contingência.
+
+\begin{table}[ht]
+\centering
+\caption{Cargo (a esquerda) X Desgaste (em cima).}\label{tab:desg_cargo}
+\begin{tabular}{rrr}
+  \hline
+ & Nao & Sim \\ 
+  \hline
+pesquisador, tecnico de laboratorio e vendedor & 0.807 & 0.193 \\ 
+Demais cargos & 0.916 & 0.084 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Percebe-se que os funcionários que são pesquisadores ou tecnicos de laboratório ou vendedores tem uma probabilidade maior de ter desgaste no serviço do que aqueles que não possuem um desses cargos.
+
+
+Na tabela \ref{tab:desg_viaja}, encontra-se a relação entre a resposta de desgaste e a variável de cargo através de uma tabela de contingência.
+
+\begin{table}[ht]
+\centering
+\caption{Viaja a trabalho (a esquerda) X Desgaste (em cima).}\label{tab:desg_viaja}
+\begin{tabular}{rrr}
+  \hline
+ & Nao & Sim \\ 
+  \hline
+viaja frequentemente & 0.751 & 0.249 \\ 
+Outros & 0.859 & 0.141 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Percebe-se que os funcionários que viaja frequentemente tem uma probabilidade maior de ter desgaste no serviço do que aqueles que não viaja ou viaja raramente.
+
+
+Na tabela \ref{tab:desg_satistrab}, encontra-se a relação entre a resposta de desgaste e a variável de satisfação no trabalho através de uma tabela de contingência.
+
+\begin{table}[ht]
+\centering
+\caption{Satisfação no trabalho (a esquerda) X Desgaste (em cima).}\label{tab:desg_satistrab}
+\begin{tabular}{rrr}
+  \hline
+ & Nao & Sim \\ 
+  \hline
+Alto, baixo e médio & 0.817 & 0.183 \\ 
+Muito Alto & 0.887 & 0.113 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Percebe-se que os funcionários que tem uma satisfação muito alta no trabalho tem uma probabilidade menor de ter desgaste no serviço do que aqueles que não tem a satisfação muito alta.
+
+Na tabela \ref{tab:desg_depar}, encontra-se a relação entre a resposta de desgaste e a variável de departamento através de uma tabela de contingência.
+
+\begin{table}[ht]
+\centering
+\caption{Departamento (a esquerda) X Desgaste (em cima).}\label{tab:desg_depar}
+\begin{tabular}{rrr}
+  \hline
+ & Nao & Sim \\ 
+  \hline
+Vendas & 0.751 & 0.249 \\ 
+ & 0.859 & 0.141 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Percebe-se que os funcionários que viaja frequentemente tem uma probabilidade maior de ter desgaste no serviço do que aqueles que não viaja ou viaja raramente.
+
 
 Olhando um pouco para uma variável sexo, na tabela \ref{tab:desg_sexo}, foi construída uma tabela de contingência entre ela e o desgaste.
 

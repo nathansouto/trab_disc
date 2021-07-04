@@ -198,7 +198,7 @@ prop.table(t)
 ```
 
 ```{r}
-with(dados, table(StatusRelacionamento, Desgaste))
+with(dados, table(Departamento, Desgaste))
 ```
 
 ```{r}
