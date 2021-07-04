@@ -435,6 +435,8 @@ Essa insignificância também ocorre em outras variáveis, como: educação, ár
 
 # Aplicação
 
+A figura \ref{fig:arvore} mostra a poda da árvore de decisão para o problema proposto, tendo 8 níveis e 15 nós em sua estrutura, desencadeando em 16 folhas.
+
 ```{r}
 dados$Desgaste = factor(dados$Desgaste, levels = c('Sim','Nao'))
 
@@ -448,7 +450,7 @@ test <- dados[-amostra,]
 fit = rpart(formula = Desgaste ~ ., method = 'class', data = train, parms = list(split = 'information'))
 ```
 
-```{r, fig.width= 9.5, fig.height= 6}
+```{r arvore, fig.width= 9.5, fig.height= 6, echo=FALSE, fig.cap="Árvore de decisão para o estudo de demissões em empresa.\\label{fig:arvore}",out.width = '70%'}
 rpart.plot(fit, type=0, extra=101, box.palette="lightgreen", branch.lty = 2, nn=TRUE, cex=0.6, fallen.leaves = F, branch.col = "brown")
 ```
 
