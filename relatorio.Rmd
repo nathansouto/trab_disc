@@ -56,7 +56,7 @@ options(
 
 
 
-{\large Wesley Cabral Alvez, RA: 225825}\\[0.2cm]
+{\large Wesley Cabral Alves, RA: 225825}\\[0.2cm]
 {\large Nathan Brusamarello De Souto, RA: 222854}\\[0.2cm]
 {\large Helton Marinho De Ávila, RA: 174471}\\[0.2cm]
 {\large Natainá Novaes Silva Barbosa, RA: 242290}\\[1cm]
@@ -88,7 +88,7 @@ A área de recursos humanos é a responsável pelos bens mais valiosos de uma em
 
 Um dos fenômenos inerentes à área de recursos humanos é o desgaste de funcionários. Também chamado de atrito (do termo em inglês “attrition”), esse problema é caracterizado pela saída de um colaborador da empresa e pode ser considerado como a ordem natural de sua jornada. Porém, há muitos motivos que podem culminar na saída de um colaborador da organização, desde problemas internos que ele pode ter enfrentado, problemas pessoais, sua aposentadoria ou até mesmo necessidade por parte da empresa de eliminar sua função (neste caso, não fazendo a contratação de um outro colaborador de imediato e deixando aquela posição vaga). [1]
 
-Esse problema tornou-se recorrente no mercado de tecnologia nos últimos anos. Segundo Michael Booz, Gerente Sênior do Programa de Insights da rede social de negócios LinkedIn, empresas de tecnologia lutam com a retenção de talentos e exibem uma taxa de rotação de funcionários de 13.2%, superior a qualquer outro setor empresarial. [3] Mesmo startups do Vale do Silício, que encantam os funcionários ao apostarem em ambientes de trabalho deslumbrantes e com benefícios diferenciados, demonstram dificuldades a reter seus funcionários: em 2017, a média de carreira na startup de transporte privado urbano Uber era de apenas 1,8 anos. [4]
+Esse problema tornou-se recorrente no mercado de tecnologia nos últimos anos. Segundo Michael Booz, Gerente Sênior do Programa de Insights da rede social de negócios LinkedIn, empresas de tecnologia lutam com a retenção de talentos e exibem uma taxa de rotação de funcionários de 13,2%, superior a qualquer outro setor empresarial. [3] Mesmo startups do Vale do Silício, que encantam os funcionários ao apostarem em ambientes de trabalho deslumbrantes e com benefícios diferenciados, demonstram dificuldades a reter seus funcionários: em 2017, a média de carreira na startup de transporte privado urbano Uber era de apenas 1,8 anos. [4]
 
 Dessa forma, fica claro que o desgaste de funcionários é um problema que afeta todos os negócios independentemente da natureza de seu segmento ou porte. A saída de colaboradores pode, além de afetar os resultados, criar custos significativos para uma empresa, tais como aqueles referentes à possível interrupção de processos e à contratação de novos funcionários e seus treinamentos. Assim sendo, torna-se de interesse gerencial compreender os fatores que culminam no fenômeno de desgaste de colaboradores e evitar que isso afete negativamente os negócios da organização.
 
@@ -119,7 +119,7 @@ knitr::include_graphics("imagem_exemplo.png")
 
 Existem diferentes algoritmos de aplicação desse método com diferentes formas de escolher os testes nos \emph{nós decisão}, tipo de variáveis utilizadas, velocidade de execução, entre outros fatores [7].
 
-Neste projeto, será utilizado o algoritmo ID3 desenvolvido por Quinlan [8]. Esse método pertence à família de algoritmos \emph{Top Down Induction of Decision Trees} - TDIDT, ou seja, árvores que são construídas de cima para baixo. O algoritmo ID3 é um dos únicos algoritmos que somente recebe dados discretos e sua fórmula de escolha dos atributos a serem testados nos \emph{nós decisão} é o Information Gain. 
+Neste projeto, será utilizado o algoritmo ID3 desenvolvido por Quinlan [8]. Esse método pertence à família de algoritmos \emph{Top Down Induction of Decision Trees} - TDIDT, ou seja, árvores que são construídas de cima para baixo. O algoritmo ID3 é um dos únicos algoritmos que somente recebe dados discretos e sua forma de escolha dos atributos a serem testados nos \emph{nós decisão} é o Information Gain. 
 
 ## Information Gain
 
@@ -134,22 +134,22 @@ Com isso, o valor esperado da entropia do atributo A têm a seguinte fórmula $$
 Além de definir quais são os melhores atributos a serem incorporados na árvore de decisão, a medida Information Gain também é utilizada pelo algoritmo para ajustar da melhor forma todas as variáveis para serem categóricas binárias. Ele segue o procedimento:
 
 \begin{enumerate}
-  \item caso a varíavel seja categórica binária, ou númerica binária, o algoritmo mantém o formato da variável;
+  \item caso a varíavel seja categórica binária, ou númerica binária, o algoritmo mantém o seu formato;
   \item caso a variável seja categória com 3 ou mais categorias, o algoritmo seleciona a melhor divisão das categorias em 2 subgrupos e a torna em uma variável categórica binária. Essa seleção dos subgrupos é feita escolhendo o melhor Information Gain de todas as possíveis divisões; [5]
-  \item caso a variável seja númerica, o algoritmo seleciona o melhor valor $c$, que pertence ao intervalo da variável, para separá-la em 2 intervalos, em que um será o intervalo positivo e o outro será o negativo. Por exemplo: Caso $Salário <= 1000$ então positivo, se $Salário > 1000$ então negativo. Essa separação também é feita escolhendo o melhor Information Gain de todos os possíveis valores $c$ pertecentes ao intervalo. [5]
+  \item caso a variável seja númerica, o algoritmo seleciona o melhor valor $c$, que pertence ao intervalo da variável, para separá-la em 2 intervalos, em que um será o intervalo positivo e o outro será o negativo. Por exemplo: Caso $Renda <= 1000$ então positivo, se $Renda > 1000$ então negativo. Essa separação também é feita escolhendo o melhor Information Gain de todos os possíveis valores $c$ pertecentes ao intervalo. [5]
 \end{enumerate}
 
 ## Número de Nós
 
 Com os critérios definidos do funcionamento da árvore de decisão ID3, é possível criar uma árvore utilizando todas as variáveis dispóniveis como atributos nos \emph{nós decisão}. Porém, isso pode acabar super-ajustando os dados, fazendo com que o algoritmo funcione muito bem somente para o conjunto de treinamento.
 
-Para evitar o super-ajuste, é realizada uma "poda" na árvore de decisão, definindo um número ótimo de nós e seus atributos. Para essa escolha, dentro do conjunto de treino, o algoritmo o separa em dois grupos: "treino" e "poda". A árvore é então criada a partir do grupo "treino" e é validada pelo grupo "poda". Essa poda é feita na quantidade de nós em que o erro de classificação começa a divergir entre o grupo "treino" e o gruopo "poda". Pode ser que não seja o menor erro dentro do conjunto de treino, mas assim não há o super-ajuste dos dados. [6].
+Para evitar o super-ajuste, é realizada uma "poda" na árvore de decisão, definindo um número ótimo de nós e seus atributos. Para essa escolha, dentro do conjunto de treino, o algoritmo o separa em dois grupos: "treino" e "poda". A árvore é então criada a partir do grupo "treino" e é validada pelo grupo "poda". Essa poda é feita na quantidade de nós em que o erro de classificação começa a divergir entre o grupo "treino" e o grupo "poda". Pode ser que não seja o menor erro dentro do conjunto de treino, mas assim não há o super-ajuste dos dados. [6].
 
 Além disso, com os números de nós definidos, os atributos que se mantiveram na árvore também são os atributos que melhor classificam às informações, ou seja, possuem o maior Information Gain.
 
 ## Reamostragem Hold-Out
 
-Para o processo de teste do algoritmo, será utilizada o método de Reamostragem Hold-out. Que consiste em separar o conjunto de dados em um conjunto de treino e conjunto de teste aleatoriamente. O algoritmo irá agrupar $\frac{2}{3}$ das informações no conjunto de treino e $\frac{1}{3}$ das informações no conjunto de teste.[2] Com isso, no final do ajuste da Árvore de Decisão ID3, será possível fazer uma última análise se o algoritmo se comporta bem aos dados.
+Para o processo de teste do algoritmo, será utilizado o método de Reamostragem Hold-out. Que consiste em separar o conjunto de dados em um conjunto de treino e conjunto de teste aleatoriamente. O algoritmo irá agrupar $\frac{2}{3}$ das informações no conjunto de treino e $\frac{1}{3}$ das informações no conjunto de teste.[2] Com isso, no final do ajuste da Árvore de Decisão ID3, será possível fazer uma última análise se o algoritmo se comporta bem aos dados.
 
 # Dados
 
@@ -167,11 +167,11 @@ Cargo                        & Cargo na empresa                                 
 NivelTrabalho                & Nível do plano de carreira atual                                \\
 ViagemTrabalho               & Frequência de viagens a trabalho                                \\
 AnosNaEmpresa                & Quantidade de anos na empresa                                   \\
-Diaria                       & Salário bruto diário                                            \\
+Diaria                       & Salário bruto diário em doláres                                 \\
 SatisfacaoTrabalho           & Satisfação do funcionário com o trabalho                        \\
 Departamento                 & Departamento do funcionário                                     \\
 NumEmpresasTrabalhadas       & Quantidade de empresas em que o funcionário já trabalhou        \\
-Renda                        & Renda Familiar                                                  \\
+Renda                        & Renda Familiar em doláres                                       \\
 NumeroEmpregados             & Número de empregados da empresa                                
 \end{tabular}
 \end{table}
@@ -272,9 +272,9 @@ colnames(dados) <- c("Idade", "Desgaste", "ViagemTrabalho",
 dados$NivelTrabalho <- factor(dados$NivelTrabalho)
 ```
 
-Para entender e visualizar melhor os dados e as variáveis, serão apresentadas algumas tabelas através de uma análise descritiva. Todas as variáveis já foram transformadas em binárias atráves do Information Gain, como citado na Metodologia. Portanto, está é uma análise das variáveis logo antes de serem utilizadas no ajuste da árvore de decisão ID3.
+Para entender e visualizar melhor os dados e as variáveis, serão apresentadas algumas tabelas através de uma análise descritiva. Todas as variáveis já foram transformadas em binárias atráves do Information Gain, como citado na Metodologia. Portanto, esta é uma análise das variáveis logo antes de serem utilizadas no ajuste da árvore de decisão ID3.
 
-Na tabela \ref{tab:desgaste}, tem-se a quantidade de resgistros para cada tipo de resposta da variável Desgaste, assim como a proporção de cada resposta.
+Na tabela \ref{tab:desgaste}, tem-se a quantidade de registros para cada tipo de resposta da variável Desgaste, assim como a proporção de cada resposta.
 
 \begin{table}[H]
 \centering
@@ -342,7 +342,7 @@ Demais cargos & 0.916 & 0.084 \\
 
 Percebe-se que os funcionários que são pesquisadores ou tecnicos de laboratório ou vendedores tem uma probabilidade maior de ter desgaste no serviço do que aqueles que não possuem um desses cargos.
 
-Na tabela \ref{tab:desg_viaja}, encontra-se a relação entre a resposta de desgaste e a variável de cargo através de uma tabela de contingência.
+Na tabela \ref{tab:desg_viaja}, encontra-se a relação entre a resposta de desgaste e a variável de viagem a trabalho através de uma tabela de contingência.
 
 \begin{table}[H]
 \centering
@@ -357,7 +357,7 @@ Outros & 0.859 & 0.141 \\
 \end{tabular}
 \end{table}
 
-Percebe-se que os funcionários que viaja frequentemente tem uma probabilidade maior de ter desgaste no serviço do que aqueles que não viaja ou viaja raramente.
+Percebe-se que os funcionários que viajam frequentemente tem uma probabilidade maior de ter desgaste no serviço do que aqueles que não viajam ou viajam raramente.
 
 
 Na tabela \ref{tab:desg_satistrab}, encontra-se a relação entre a resposta de desgaste e a variável de satisfação no trabalho através de uma tabela de contingência.
@@ -394,7 +394,7 @@ Outros departamentos & 0.858 & 0.142 \\
 
 Percebe-se que os funcionários que pertencem ao departamento de vendas tem uma probabilidade maior de ter desgaste no serviço do que aqueles que pertence ao RH ou ao departamento de pesquisa e desenvolvimento.
 
-Na tabela \ref{tab:desg_renda}, encontra-se a relação entre a resposta de desgaste e a variável de renda através de uma tabela de contingência.
+Na tabela \ref{tab:desg_renda}, encontra-se a relação entre a resposta de desgaste e a variável de renda familiar através de uma tabela de contingência.
 
 \begin{table}[H]
 \centering
@@ -409,7 +409,7 @@ Na tabela \ref{tab:desg_renda}, encontra-se a relação entre a resposta de desg
 \end{tabular}
 \end{table}
 
-Percebe-se que os funcionários que possuem uma renda inferior ao valor de 4.056 tem uma probabilidade maior de ter desgaste no serviço do que aqueles que possuem uma renda mensal superior ou igual a esse valor.
+Percebe-se que os funcionários que possuem uma renda familia inferior ao valor de 4.056 tem uma probabilidade maior de ter desgaste no serviço do que aqueles que possuem uma renda familiar superior ou igual a esse valor.
 
 Na tabela \ref{tab:desg_col}, encontra-se a relação entre a resposta de desgaste e a variável de anos de colaboração através de uma tabela de contingência.
 
@@ -437,8 +437,8 @@ Na tabela \ref{tab:desg_nivel}, encontra-se a relação entre a resposta de desg
   \hline
  & Não & Sim \\ 
   \hline
-igual a 1 & 0.737 & 0.263 \\ 
-diferente de 1 & 0.889 & 0.101 \\ 
+'= 1' & 0.737 & 0.263 \\ 
+'$\neq$ 1' & 0.889 & 0.101 \\ 
    \hline
 \end{tabular}
 \end{table}
@@ -477,7 +477,7 @@ Na tabela \ref{tab:desg_diaria}, encontra-se a relação entre a resposta de des
 \end{tabular}
 \end{table}
 
-Tem-se que a probabilidade de desgaste para as duas categorias de diária são aproximadamente iguais.
+Tem-se que a probabilidade de desgaste para as duas categorias de diária são aproximadamente iguais. Porém com o decorrer da árvore de decisão, essa variável é importante após o teste em outras categorias com Information Gain maior.
 
 Na tabela \ref{tab:desg_nume}, encontra-se a relação entre a resposta de desgaste e a variável número de empresas trabalhadas pelos funcionários.
 
@@ -494,7 +494,7 @@ Na tabela \ref{tab:desg_nume}, encontra-se a relação entre a resposta de desga
 \end{tabular}
 \end{table}
 
-Tem-se que os funcionários que trabalhou em 5 ou mais empresas tem uma probabilidade maior de ter desgaste no serviço do que aqueles que trabalhou em menos de 5 empresas.
+Tem-se que os funcionários que trabalharam em 5 ou mais empresas tem uma probabilidade maior de ter desgaste no serviço do que aqueles que trabalharam em menos de 5 empresas.
 
 Na tabela \ref{tab:desg_empr}, encontra-se a relação entre a resposta de desgaste e a variável número de empregados.
 
@@ -528,9 +528,9 @@ test <- dados[-amostra,]
 fit = rpart(formula = Desgaste ~ ., method = 'class', data = train, parms = list(split = 'information'))
 ```
 
-A figura \ref{fig:arvore} mostra o resultado da aplicação da árvore de decisão ID3 para o problema proposto, tendo 8 níveis e 15 \emph{nós decisão} em sua estrutura, desencadeando em 16 \emph{nós folha}. Em cada nó de decisão um teste é feito, e se a resposta é "Sim" a árvore segue em sequência para a esquerda em outro nó; caso contrário, a árvore segue à direita. Como mencionado anteriormente, todas as variáveis foram transformadas em atributos categóricos binários para os testes nos \emph{nós decisão}, incluindo as variáveis numéricas. Nos \emph{nós folha}, está a proporção de indíviduos agrupados neles e quantos tiveram ou não desgaste. Por exemplo, o \emph{nó folha} mais a direita agrupou 67% dos funcionários como se não houvessem tido desgaste, porém 55 deles relataram desgaste e 597 realmente não o relataram. Independentemente do \emph{nó folha}, internamente à esquerda está a quantidade de pessoas com desgaste e à direita está a quantidade de pessoas sem desgaste.
+A Figura \ref{fig:arvore} mostra o resultado da aplicação da árvore de decisão ID3 para o problema proposto, tendo 8 níveis e 15 \emph{nós decisão} em sua estrutura, desencadeando em 16 \emph{nós folha}. Em cada nó de decisão um teste é feito, e se a resposta é "Sim" a árvore segue em sequência para a esquerda em outro nó; caso contrário, a árvore segue à direita. Como mencionado anteriormente, todas as variáveis foram transformadas em atributos categóricos binários para os testes nos \emph{nós decisão}, incluindo as variáveis numéricas. Nos \emph{nós folha}, está a proporção de indíviduos agrupados neles e quantos tiveram ou não desgaste. Por exemplo, o \emph{nó folha} mais a direita agrupou 67% dos funcionários como se não houvessem tido desgaste, porém 55 deles relataram desgaste e 597 realmente não o relataram. Independentemente do \emph{nó folha}, internamente à esquerda está a quantidade de pessoas com desgaste e à direita está a quantidade de pessoas sem desgaste.
 
-```{r arvore, fig.width= 9.5, fig.height= 6, echo=FALSE, fig.cap="Árvore de decisão para o estudo de demissões em empresa.\\label{fig:arvore}"}
+```{r arvore, fig.width= 9.5, fig.height= 6, echo=FALSE, fig.cap="Árvore de decisão para o estudo de demissões em empresa.\\label{fig:arvore}", fig.pos='H'}
 rpart.plot(fit, type=0, extra=101, box.palette="lightgreen", branch.lty = 2, nn=TRUE, cex=0.6, fallen.leaves = F, branch.col = "brown")
 ```
 
@@ -569,7 +569,7 @@ Nao & 11           & 801          & 18          & 403
 
 Com a construção da árvore de decisão, a Figura \ref{fig:arvore} permite notar que os \emph{nós folha} com a resposta "Sim" para o desgaste tem uma proporção de indivíduos agrupados menor do que a resposta "Não", o que já era esperado dado que o conjunto de dados possui mais funcionários que não relataram desgaste do que o contrário, como mostra a Tabela \ref{tab:desgaste}.
 
-Além disso, através da árvore é possível observar as possíveis causas de desgaste dos funcionários. Cada \emph{nó decisão} possui um atributo que obteve um Information Gain alto em comparação aos demais. Como explicado na Metodologia, o \emph{nó raiz} é o que possui o maior Information Gain, que decai ao longo dos níveis da árvore. 
+Além disso, através da árvore observam-se as possíveis causas de desgaste dos funcionários. Cada \emph{nó decisão} possui um atributo que obteve um Information Gain alto em comparação aos demais. Como explicado na Metodologia, o \emph{nó raiz} é o que possui o maior Information Gain, que decai ao longo dos níveis da árvore. 
 
 Portanto, as variáveis que melhor diminuem a entropia dos dados são HoraExtra, StatusRelacionamento, AnosColaboracao e todas as demais que estão nos \emph{nós decisão} da árvore, isto é, são essas as variáveis mais decisivas para o funcionário ter ou não desgaste.
 
